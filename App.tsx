@@ -158,7 +158,7 @@ const Hero = () => (
             <a 
               href="#plans" 
               onClick={handleCTAClick}
-              className="px-10 py-5 bg-green-600 hover:bg-green-700 text-white rounded-2xl text-xl font-bold shadow-xl transition-all transform hover:-translate-y-1 text-center animate-pulse-soft"
+              className="px-10 py-5 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white rounded-2xl text-xl font-bold shadow-xl transition-all transform hover:-translate-y-1 text-center animate-pulse-soft"
             >
               Quero Garantir o meu acesso agora
             </a>
@@ -180,7 +180,7 @@ const Stats = () => (
     <div className="max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8">
       {[
         { val: "12.000+", label: "Famílias Satisfeitas" },
-        { val: "450+", label: "Atividades Prontas" },
+        { val: "+650", label: "Atividades Prontas" },
         { val: "4.9/5", label: "Avaliação Média", star: true },
         { val: "100%", label: "Digital e Imediato" }
       ].map((stat, i) => (
@@ -270,7 +270,7 @@ const Features = () => {
           <a 
             href="#plans" 
             onClick={handleCTAClick}
-            className="px-10 py-5 bg-green-600 hover:bg-green-700 text-white rounded-2xl text-xl font-bold shadow-xl transition-all transform hover:-translate-y-1 text-center flex items-center gap-2"
+            className="px-10 py-5 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white rounded-2xl text-xl font-bold shadow-xl transition-all transform hover:-translate-y-1 text-center flex items-center gap-2"
           >
             Garantir esse material agora <ArrowRight className="w-6 h-6" />
           </a>
@@ -336,63 +336,65 @@ const IdealFor = () => (
 );
 
 const Benefits = () => (
-  <section className="py-24 px-4 bg-slate-50/50">
-    <div className="max-w-6xl mx-auto">
-      <Reveal className="text-center mb-16 space-y-4">
-        <h2 className="text-3xl md:text-5xl font-bold text-slate-900 tracking-tight">Benefícios Que Transformam</h2>
-        <div className="w-24 h-1.5 bg-green-500 mx-auto rounded-full"></div>
-        <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto">Muito mais do que atividades, uma ferramenta completa para o ensino bíblico.</p>
+  <section className="py-24 px-4 bg-slate-950 relative overflow-hidden">
+    {/* Background Glow */}
+    <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+      <div className="absolute top-1/4 -left-20 w-96 h-96 bg-green-900/20 rounded-full blur-[120px]"></div>
+      <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-green-900/10 rounded-full blur-[120px]"></div>
+    </div>
+
+    <div className="max-w-6xl mx-auto relative z-10">
+      <Reveal className="text-center mb-20 space-y-4">
+        <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight">Benefícios Que Transformam</h2>
+        <div className="w-24 h-1.5 bg-green-500 mx-auto rounded-full shadow-[0_0_15px_rgba(34,197,94,0.5)]"></div>
+        <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto">Muito mais do que atividades, uma ferramenta completa para o ensino bíblico.</p>
       </Reveal>
       
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
         {[
           { 
             title: "Conexão Familiar", 
             desc: "Momentos de qualidade aprendendo juntos sobre a fé e fortalecendo os vínculos entre pais e filhos.", 
-            icon: <Heart className="text-pink-600" />,
-            bgColor: "bg-pink-100/50"
+            icon: <Heart />
           },
           { 
             title: "Aprendizado Efetivo", 
             desc: "As crianças absorvem e retêm melhor os ensinamentos bíblicos através de atividades práticas e lúdicas.", 
-            icon: <BookOpen className="text-blue-600" />,
-            bgColor: "bg-blue-100/50"
+            icon: <BookOpen />
           },
           { 
             title: "Economia de Tempo", 
             desc: "Tenha tudo pronto em um só lugar. Pare de perder horas pesquisando material na internet.", 
-            icon: <Clock className="text-yellow-600" />,
-            bgColor: "bg-yellow-100/50"
+            icon: <Clock />
           },
           { 
             title: "Material Para Grupos", 
             desc: "Perfeito para escola dominical, células infantis e pequenos grupos de estudo cristão.", 
-            icon: <Users className="text-purple-600" />,
-            bgColor: "bg-purple-100/50"
+            icon: <Users />
           },
           { 
             title: "Criatividade e Diversão", 
             desc: "Atividades variadas que mantêm as crianças engajadas, curiosas e animadas para aprender.", 
-            icon: <Gamepad2 className="text-orange-600" />,
-            bgColor: "bg-orange-100/50"
+            icon: <Gamepad2 />
           },
           { 
             title: "Conteúdo Confiável", 
             desc: "Material biblicamente fundamentado e revisado por educadores dedicados ao ensino cristão.", 
-            icon: <ShieldCheck className="text-green-600" />,
-            bgColor: "bg-green-100/50"
+            icon: <ShieldCheck />
           }
         ].map((benefit, idx) => (
           <Reveal key={idx} delay={idx * 100} variant="up">
-            <div className="group relative p-8 md:p-10 bg-white rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 overflow-hidden h-full">
-              <div className={`absolute top-0 right-0 w-24 h-24 ${benefit.bgColor} rounded-full -mr-12 -mt-12 opacity-0 group-hover:opacity-100 transition-opacity`}></div>
+            <div className="group relative p-8 md:p-10 bg-slate-900/40 border border-slate-800 rounded-3xl hover:border-green-500/50 transition-all duration-500 h-full flex flex-col items-start text-left overflow-hidden">
+              {/* Top Glow Line */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-green-500 rounded-b-full shadow-[0_0_15px_rgba(34,197,94,0.8)] group-hover:w-24 transition-all duration-500"></div>
               
-              <div className={`w-16 h-16 ${benefit.bgColor} rounded-2xl flex items-center justify-center mb-8 shadow-inner group-hover:scale-110 transition-transform duration-300`}>
-                {React.cloneElement(benefit.icon as React.ReactElement<any>, { size: 32 })}
+              {/* Icon Box */}
+              <div className="w-12 h-12 border border-green-500/30 rounded-xl flex items-center justify-center mb-8 bg-green-500/5 group-hover:bg-green-500/10 group-hover:border-green-500/60 transition-all duration-300">
+                {React.cloneElement(benefit.icon as React.ReactElement<any>, { size: 24, className: "text-green-500" })}
               </div>
               
-              <h4 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-green-600 transition-colors">{benefit.title}</h4>
-              <p className="text-slate-600 leading-relaxed text-lg">
+              <h4 className="text-xl md:text-2xl font-bold text-white mb-4 group-hover:text-green-400 transition-colors">{benefit.title}</h4>
+              <p className="text-slate-400 leading-relaxed text-base md:text-lg">
                 {benefit.desc}
               </p>
             </div>
@@ -405,18 +407,42 @@ const Benefits = () => (
 
 const Bonuses = () => {
   const bonuses: Bonus[] = [
-    { id: "01", title: "Guia de Versículos Para Memorização", value: "R$ 27,00", description: "50 versículos ilustrados prontos para impressão, organizados por temas e idades.", icon: <BookOpen /> },
-    { id: "02", title: "Calendário Bíblico Anual Infantil", value: "R$ 37,00", description: "12 meses de atividades temáticas seguindo histórias bíblicas cronologicamente.", icon: <Calendar /> },
-    { id: "03", title: "Kit de Jogos Educativos Bíblicos", value: "R$ 27,00", description: "Quebra-cabeças, caça-palavras e jogos da memória com temas bíblicos.", icon: <Gamepad2 /> },
-    { id: "04", title: "Como Ensinar a Bíblia Para Crianças", value: "R$ 19,00", description: "Guia completo com estratégias pedagógicas e dicas práticas para educadores.", icon: <Users /> }
+    { 
+      id: "1", 
+      title: "Guia de Versículos Para Memorização", 
+      value: "R$ 27,00", 
+      description: "50 versículos ilustrados prontos para impressão, organizados por temas e idades.", 
+      image: "https://i.postimg.cc/MHsQP9SJ/750ca9aa-1d3c-4f8f-b009-2a3b5548ba9e.jpg" 
+    },
+    { 
+      id: "2", 
+      title: "Calendário Bíblico Anual Infantil", 
+      value: "R$ 37,00", 
+      description: "12 meses de atividades temáticas seguindo histórias bíblicas cronologicamente.", 
+      image: "https://i.postimg.cc/QC6T4f3L/cc65effd-459a-44b2-8383-074b29997d96.jpg" 
+    },
+    { 
+      id: "3", 
+      title: "Kit de Jogos Bíblicos Divertidos", 
+      value: "R$ 27,00", 
+      description: "Quebra-cabeças, caça-palavras, jogo da memória bíblico e bingo das histórias sagradas.", 
+      image: "https://i.postimg.cc/2yHZc0DR/288ef062-9a10-4c78-b28c-1151e4327988.jpg" 
+    },
+    { 
+      id: "4", 
+      title: "Como Ensinar a Bíblia Para Crianças", 
+      value: "R$ 19,00", 
+      description: "Guia completo com estratégias pedagógicas e dicas práticas para educadores e pais.", 
+      image: "https://i.postimg.cc/gjMZSgP1/ca89df09-0e1c-4898-a070-28ff3209ed04.jpg" 
+    }
   ];
 
   return (
-    <section className="py-24 px-4 bg-[#f8fafc] relative overflow-hidden">
+    <section className="py-24 px-4 bg-[#f0f9ff]/30 relative overflow-hidden">
       {/* Abstract Background Shapes */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-40">
-        <div className="absolute top-10 left-10 w-64 h-64 bg-green-100 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-10 right-10 w-80 h-80 bg-yellow-100 rounded-full blur-3xl"></div>
+        <div className="absolute top-10 left-10 w-64 h-64 bg-blue-100 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-10 right-10 w-80 h-80 bg-green-100 rounded-full blur-3xl"></div>
       </div>
 
       <div className="max-w-6xl mx-auto relative z-10">
@@ -434,44 +460,49 @@ const Bonuses = () => {
           </div>
         </Reveal>
         
-        <div className="grid md:grid-cols-2 gap-8 lg:gap-10 mb-20">
+        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8 lg:gap-12 mb-20 max-w-5xl mx-auto">
           {bonuses.map((bonus, idx) => (
             <Reveal key={bonus.id} delay={idx * 150} variant="up" className="h-full">
-              <div className="group relative bg-white border border-slate-200 p-8 md:p-10 rounded-[3rem] shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden flex flex-col md:flex-row gap-8 h-full">
-                {/* Visual Accent */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-green-50 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700"></div>
+              <div className="group relative bg-white p-8 md:p-10 rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_60px_rgba(0,0,0,0.1)] transition-all duration-500 flex flex-col h-full border border-slate-100">
+                {/* Book Image */}
+                <div className="relative mb-8 flex justify-center">
+                  <div className="w-full max-w-[240px] aspect-[4/5] relative group-hover:scale-105 transition-transform duration-500">
+                    <img 
+                      src={bonus.image} 
+                      alt={bonus.title} 
+                      className="w-full h-full object-cover rounded-2xl shadow-2xl"
+                      referrerPolicy="no-referrer"
+                    />
+                    <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-black/10"></div>
+                  </div>
+                </div>
                 
-                <div className="relative shrink-0 flex items-center justify-center">
-                   <div className="w-20 h-20 bg-green-600 rounded-[2rem] rotate-3 group-hover:rotate-0 transition-all duration-300 flex items-center justify-center shadow-lg shadow-green-200">
-                     {React.cloneElement(bonus.icon as React.ReactElement<any>, { size: 36, className: "text-white" })}
-                   </div>
-                   <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center text-[10px] font-black text-green-900 shadow-md">
-                     {bonus.id}
-                   </div>
+                {/* Label Row */}
+                <div className="flex justify-between items-center mb-4">
+                  <span className="text-[#1e3a8a] font-bold text-xl uppercase tracking-tight">
+                    BÔNUS {bonus.id}
+                  </span>
+                  <span className="text-green-600 font-bold text-sm uppercase tracking-wider">
+                    HOJE: GRÁTIS
+                  </span>
                 </div>
 
-                <div className="relative flex-grow flex flex-col">
-                  <div className="flex justify-between items-start mb-4">
-                    <h4 className="text-2xl font-bold text-slate-900 group-hover:text-green-600 transition-colors leading-tight">
-                      {bonus.title}
-                    </h4>
-                  </div>
-                  
-                  <p className="text-slate-500 text-lg leading-relaxed mb-8">
-                    {bonus.description}
-                  </p>
-                  
-                  <div className="mt-auto flex items-center justify-between border-t border-slate-100 pt-6">
-                    <div className="flex flex-col">
-                      <span className="text-slate-400 text-[10px] uppercase font-bold tracking-widest">Valor Original</span>
-                      <span className="text-slate-500 line-through font-bold">{bonus.value}</span>
-                    </div>
-                    <div className="flex flex-col items-end">
-                      <span className="text-green-600 text-[10px] uppercase font-black tracking-widest">Seu Presente</span>
-                      <span className="text-green-600 text-xl font-black">GRÁTIS</span>
-                    </div>
-                  </div>
+                {/* Title */}
+                <h4 className="text-2xl font-bold text-slate-900 mb-2 leading-tight">
+                  {bonus.title}
+                </h4>
+                
+                {/* Value */}
+                <div className="mb-6">
+                  <span className="text-red-500 font-medium text-lg line-through opacity-80">
+                    Valor: {bonus.value}
+                  </span>
                 </div>
+
+                {/* Description */}
+                <p className="text-slate-600 text-lg leading-relaxed">
+                  {bonus.description}
+                </p>
               </div>
             </Reveal>
           ))}
@@ -481,17 +512,9 @@ const Bonuses = () => {
            <a 
             href="#plans" 
             onClick={handleCTAClick}
-            className="inline-block p-1 bg-white rounded-3xl shadow-xl border border-slate-100 transition-transform hover:scale-105"
+            className="inline-block px-12 py-5 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white rounded-2xl text-xl font-bold shadow-xl transition-all transform hover:-translate-y-1 text-center animate-pulse-soft"
            >
-              <div className="bg-green-600 text-white px-10 py-5 rounded-[2rem] font-bold text-lg flex flex-col sm:flex-row items-center gap-4">
-                <div className="flex items-center gap-4">
-                  <span>Valor Total em Bônus: <span className="text-yellow-400 text-2xl font-black">R$ 110,00</span></span>
-                  <span className="hidden sm:inline-block w-px h-8 bg-white/20"></span>
-                </div>
-                <div className="flex items-center gap-2 font-black uppercase tracking-wider text-sm">
-                  Clique para garantir tudo hoje <ArrowRight size={18} />
-                </div>
-              </div>
+              Quero os bônus
            </a>
         </Reveal>
       </div>
@@ -540,7 +563,7 @@ const Pricing = () => {
               <div className="mt-auto">
                 <a 
                   href="https://ggcheckout.com.br/checkout/v5/ZXz3YglegUw0oQhq7W8Z"
-                  className="block w-full py-5 rounded-2xl text-base font-black bg-slate-800 hover:bg-slate-900 text-white transition-all transform active:scale-95 uppercase tracking-wider shadow-xl text-center"
+                  className="block w-full py-5 rounded-2xl text-base font-black bg-gradient-to-r from-slate-900 to-slate-800 hover:from-black hover:to-slate-900 text-white transition-all transform active:scale-95 uppercase tracking-wider shadow-xl text-center"
                 >
                   Garantir Plano Básico
                 </a>
@@ -601,7 +624,7 @@ const Pricing = () => {
               <div className="mt-auto">
                 <a 
                   href="https://ggcheckout.com.br/checkout/v5/7wOe47g8XVzL1HnjKopl"
-                  className="block w-full py-6 rounded-2xl text-lg font-black bg-green-600 hover:bg-green-700 text-white transition-all transform active:scale-95 uppercase tracking-widest shadow-xl shadow-green-100 animate-pulse-soft text-center"
+                  className="block w-full py-6 rounded-2xl text-lg font-black bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white transition-all transform active:scale-95 uppercase tracking-widest shadow-xl shadow-green-100 animate-pulse-soft text-center"
                 >
                   Garantir Plano Premium
                 </a>
@@ -660,7 +683,7 @@ const Guarantee = () => (
                <a 
                 href="#plans" 
                 onClick={handleCTAClick}
-                className="px-8 py-4 bg-slate-900 hover:bg-black text-white rounded-xl font-bold shadow-lg transition-transform hover:scale-105 flex items-center gap-2"
+                className="px-8 py-4 bg-gradient-to-r from-slate-900 to-slate-800 hover:from-black hover:to-slate-900 text-white rounded-xl font-bold shadow-lg transition-transform hover:scale-105 flex items-center gap-2"
                >
                  Garantir meu risco zero <ArrowRight size={20} />
                </a>
