@@ -522,9 +522,157 @@ const Bonuses = () => {
   );
 };
 
+const UpsellModal: React.FC<{ 
+  isOpen: boolean; 
+  onClose: () => void; 
+  onConfirm: () => void; 
+  onDecline: () => void;
+}> = ({ isOpen, onClose, onConfirm, onDecline }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-[100] overflow-y-auto bg-[#2D8659]/40 backdrop-blur-sm">
+      <div className="flex min-h-full items-center justify-center p-4">
+        <div className="bg-white rounded-3xl max-w-2xl w-full shadow-2xl relative overflow-hidden animate-in fade-in zoom-in duration-300 flex flex-col my-8">
+          
+          {/* Badge Superior */}
+          <div className="bg-[#2D8659] text-white text-center py-2 text-xs font-bold tracking-widest uppercase">
+            OPORTUNIDADE ÚNICA
+          </div>
+
+          <button 
+            onClick={onClose}
+            className="absolute top-10 right-6 text-slate-400 hover:text-slate-600 transition-colors z-20"
+          >
+            <X size={20} />
+          </button>
+
+          <div className="p-6 md:p-8 space-y-6">
+            {/* Título e Subtítulo */}
+            <div className="text-center space-y-2">
+              <h3 className="text-2xl md:text-3xl font-black text-[#2D8659] leading-tight">
+                ⚠️ ESPERA! NÃO LEVE APENAS O BÁSICO
+              </h3>
+              <p className="text-[#333] text-sm md:text-base">
+                Por apenas <span className="font-bold">+R$ 10,00</span> você desbloqueia o acesso total ao <span className="font-bold text-[#2D8659]">Plano Premium</span>.
+              </p>
+            </div>
+
+            {/* Cards Lado a Lado */}
+            <div className="grid md:grid-cols-2 gap-4">
+              {/* Card Básico */}
+              <div className="border border-[#E0E0E0] rounded-2xl p-5 flex flex-col bg-white">
+                <span className="text-[10px] font-bold text-[#2D8659] uppercase tracking-wider mb-1">PLANO BÁSICO</span>
+                <div className="text-2xl font-black text-[#2D8659] mb-4">R$ 9,90</div>
+                <ul className="space-y-2 flex-grow">
+                  <li className="flex items-start gap-2 text-xs text-slate-600">
+                    <Check size={14} className="text-[#2D8659] shrink-0 mt-0.5" />
+                    <span>Atividades Bíblicas prontas para imprimir</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-xs text-slate-600">
+                    <Check size={14} className="text-[#2D8659] shrink-0 mt-0.5" />
+                    <span>Acesso Vitalício</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Card Premium */}
+              <div className="border-4 border-[#2D8659] rounded-2xl p-5 flex flex-col bg-[#E8F5E9] relative">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#2D8659] text-white text-[9px] font-bold px-3 py-1 rounded-full uppercase whitespace-nowrap">
+                  MAIS VANTAJOSO
+                </div>
+                <span className="text-[10px] font-bold text-[#2D8659] uppercase tracking-wider mb-1 mt-1">PLANO PREMIUM</span>
+                <div className="text-2xl font-black text-[#2D8659] mb-4">R$ 19,90</div>
+                <ul className="space-y-2 flex-grow">
+                  {[
+                    "Tudo do Plano Básico",
+                    "+650 Atividades Bíblicas prontas",
+                    "+350 Atividades Extras anuais",
+                    "Histórias da Criação a Jesus",
+                    "TODOS os 4 Bônus inclusos",
+                    "Suporte prioritário via email"
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-2 text-xs text-slate-700 font-medium">
+                      <div className="w-3.5 h-3.5 rounded-full border border-[#2D8659] flex items-center justify-center shrink-0 mt-0.5">
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#2D8659]"></div>
+                      </div>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Banner Economia */}
+            <div className="bg-[#4CAF50] text-white text-center py-3 px-4 rounded-xl font-bold text-sm md:text-base shadow-md">
+              🎁 VOCÊ ECONOMIZA R$ 10,00+ GANHA 21 ITEM BÔNUS
+            </div>
+
+            {/* Botões de Ação */}
+            <div className="space-y-4 text-center">
+              <button 
+                onClick={onConfirm}
+                className="w-full py-4 bg-[#2D8659] hover:bg-[#3ea368] text-white rounded-xl text-lg font-black shadow-lg transition-all transform hover:scale-[1.02] active:scale-95 uppercase tracking-wider"
+              >
+                ✅ SIM! GARANTIR O PLANO PREMIUM POR R$ 19,90
+              </button>
+              
+              <button 
+                onClick={onDecline}
+                className="text-[#666] hover:text-[#2D8659] font-bold text-xs underline underline-offset-4 transition-colors"
+              >
+                Não, quero continuar apenas com o Plano Básico (R$ 9,90)
+              </button>
+            </div>
+
+            {/* Rodapé */}
+            <div className="text-center text-[10px] text-slate-400 font-medium pt-2 border-t border-slate-100">
+              🔒 CHECKOUT 100% SEGURO • GARANTIA DE 7 DIAS
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Pricing = () => {
+  const [showUpsell, setShowUpsell] = useState(false);
+
+  const handleBasicClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setShowUpsell(true);
+  };
+
+  const getCheckoutUrl = (baseUrl: string) => {
+    try {
+      const url = new URL(baseUrl);
+      const currentParams = new URLSearchParams(window.location.search);
+      currentParams.forEach((value, key) => {
+        url.searchParams.set(key, value);
+      });
+      return url.toString();
+    } catch (e) {
+      return baseUrl;
+    }
+  };
+
+  const handleConfirmPremium = () => {
+    window.location.href = getCheckoutUrl("https://ggcheckout.com.br/checkout/v5/5edlPTtL5Kn1JlgmiIbY");
+  };
+
+  const handleDeclineUpsell = () => {
+    window.location.href = getCheckoutUrl("https://ggcheckout.com.br/checkout/v5/ZXz3YglegUw0oQhq7W8Z");
+  };
+
   return (
     <section id="plans" className="py-24 px-4 bg-white scroll-mt-20 overflow-hidden text-slate-800">
+      <UpsellModal 
+        isOpen={showUpsell} 
+        onClose={() => setShowUpsell(false)} 
+        onConfirm={handleConfirmPremium}
+        onDecline={handleDeclineUpsell}
+      />
       <div className="max-w-6xl mx-auto">
         <Reveal className="text-center mb-12">
           <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight uppercase">Escolha o Seu Plano</h2>
@@ -561,12 +709,12 @@ const Pricing = () => {
               </div>
               
               <div className="mt-auto">
-                <a 
-                  href="https://ggcheckout.com.br/checkout/v5/ZXz3YglegUw0oQhq7W8Z"
+                <button 
+                  onClick={handleBasicClick}
                   className="block w-full py-5 rounded-2xl text-base font-black bg-gradient-to-r from-slate-900 to-slate-800 hover:from-black hover:to-slate-900 text-white transition-all transform active:scale-95 uppercase tracking-wider shadow-xl text-center"
                 >
                   Garantir Plano Básico
-                </a>
+                </button>
                 <div className="mt-8 flex justify-center items-center gap-2 text-slate-400 font-bold text-[10px] uppercase tracking-widest">
                   <Lock size={12} /> Compra 100% Segura
                 </div>
@@ -623,7 +771,7 @@ const Pricing = () => {
               
               <div className="mt-auto">
                 <a 
-                  href="https://ggcheckout.com.br/checkout/v5/7wOe47g8XVzL1HnjKopl"
+                  href={getCheckoutUrl("https://ggcheckout.com.br/checkout/v5/7wOe47g8XVzL1HnjKopl")}
                   className="block w-full py-6 rounded-2xl text-lg font-black bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white transition-all transform active:scale-95 uppercase tracking-widest shadow-xl shadow-green-100 animate-pulse-soft text-center"
                 >
                   Garantir Plano Premium
