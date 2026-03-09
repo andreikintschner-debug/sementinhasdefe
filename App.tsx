@@ -525,9 +525,9 @@ const Bonuses = () => {
 const UpsellModal: React.FC<{ 
   isOpen: boolean; 
   onClose: () => void; 
-  onConfirm: () => void; 
-  onDecline: () => void;
-}> = ({ isOpen, onClose, onConfirm, onDecline }) => {
+  premiumUrl: string;
+  basicUrl: string;
+}> = ({ isOpen, onClose, premiumUrl, basicUrl }) => {
   if (!isOpen) return null;
 
   return (
@@ -610,19 +610,19 @@ const UpsellModal: React.FC<{
 
             {/* Botões de Ação */}
             <div className="space-y-4 text-center">
-              <button 
-                onClick={onConfirm}
-                className="w-full py-4 bg-[#2D8659] hover:bg-[#3ea368] text-white rounded-xl text-lg font-black shadow-lg transition-all transform hover:scale-[1.02] active:scale-95 uppercase tracking-wider"
+              <a 
+                href={premiumUrl}
+                className="block w-full py-4 bg-[#2D8659] hover:bg-[#3ea368] text-white rounded-xl text-lg font-black shadow-lg transition-all transform hover:scale-[1.02] active:scale-95 uppercase tracking-wider text-center"
               >
                 ✅ SIM! GARANTIR O PLANO PREMIUM POR R$ 19,90
-              </button>
+              </a>
               
-              <button 
-                onClick={onDecline}
-                className="text-[#666] hover:text-[#2D8659] font-bold text-xs underline underline-offset-4 transition-colors"
+              <a 
+                href={basicUrl}
+                className="block text-[#666] hover:text-[#2D8659] font-bold text-xs underline underline-offset-4 transition-colors"
               >
                 Não, quero continuar apenas com o Plano Básico (R$ 9,90)
-              </button>
+              </a>
             </div>
 
             {/* Rodapé */}
@@ -657,21 +657,13 @@ const Pricing = () => {
     }
   };
 
-  const handleConfirmPremium = () => {
-    window.location.href = getCheckoutUrl("https://ggcheckout.com.br/checkout/v5/5edlPTtL5Kn1JlgmiIbY");
-  };
-
-  const handleDeclineUpsell = () => {
-    window.location.href = getCheckoutUrl("https://ggcheckout.com.br/checkout/v5/ZXz3YglegUw0oQhq7W8Z");
-  };
-
   return (
     <section id="plans" className="py-24 px-4 bg-white scroll-mt-20 overflow-hidden text-slate-800">
       <UpsellModal 
         isOpen={showUpsell} 
         onClose={() => setShowUpsell(false)} 
-        onConfirm={handleConfirmPremium}
-        onDecline={handleDeclineUpsell}
+        premiumUrl={getCheckoutUrl("https://ggcheckout.com.br/checkout/v5/5edlPTtL5Kn1JlgmiIbY")}
+        basicUrl={getCheckoutUrl("https://ggcheckout.com.br/checkout/v5/ZXz3YglegUw0oQhq7W8Z")}
       />
       <div className="max-w-6xl mx-auto">
         <Reveal className="text-center mb-12">
