@@ -121,13 +121,13 @@ const Hero = () => (
     <div className="max-w-4xl mx-auto flex flex-col items-center text-center relative z-10 space-y-8">
       <Reveal variant="scale">
         <div className="inline-flex items-center px-4 py-1.5 bg-yellow-100 text-yellow-800 rounded-full text-sm font-bold border border-yellow-200 shadow-sm animate-bounce">
-          Oferta Especial - Tempo Limitado
+          🔥 OFERTA EXPIRA EM 24H
         </div>
       </Reveal>
       
       <Reveal delay={200}>
         <h1 className="text-2xl md:text-4xl font-bold text-green-800 leading-tight">
-          +650 Atividades Bíblicas para Auxiliar suas Aulas de Ministério Infantil e aproximar as Crianças da Palavra de Deus com alegria e criatividade!
+          +650 Atividades Bíblicas para Fazer as Crianças Amarem a Palavra de Deus
         </h1>
       </Reveal>
 
@@ -151,6 +151,14 @@ const Hero = () => (
           <p className="text-lg md:text-xl text-slate-600 max-w-2xl">
             Atividades prontas para imprimir e usar quantas vezes quiser. Produto digital com acesso imediato.
           </p>
+        </Reveal>
+
+        <Reveal delay={700}>
+          <div className="flex flex-col items-center mt-2 mb-2">
+            <span className="text-slate-500 line-through text-lg font-medium">De R$ 39,90 por apenas</span>
+            <span className="text-5xl font-extrabold text-green-600 my-1">R$ 9,90</span>
+            <span className="text-sm font-bold text-slate-700 bg-yellow-100 px-4 py-1.5 rounded-full mt-2">Pagamento Único • Acesso Vitalício</span>
+          </div>
         </Reveal>
         
         <Reveal delay={800} variant="scale">
@@ -331,23 +339,33 @@ const IdealFor = () => (
           </div>
         </Reveal>
       </div>
+
+      <Reveal variant="scale" className="flex justify-center mt-16">
+        <a 
+          href="#plans" 
+          onClick={handleCTAClick}
+          className="px-10 py-5 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white rounded-2xl text-xl font-bold shadow-xl transition-all transform hover:-translate-y-1 text-center animate-pulse-soft"
+        >
+          Sim, esse kit é para mim
+        </a>
+      </Reveal>
     </div>
   </section>
 );
 
 const Benefits = () => (
-  <section className="py-24 px-4 bg-slate-950 relative overflow-hidden">
+  <section className="py-24 px-4 bg-white relative overflow-hidden">
     {/* Background Glow */}
     <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-      <div className="absolute top-1/4 -left-20 w-96 h-96 bg-green-900/20 rounded-full blur-[120px]"></div>
-      <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-green-900/10 rounded-full blur-[120px]"></div>
+      <div className="absolute top-1/4 -left-20 w-96 h-96 bg-green-100/50 rounded-full blur-[120px]"></div>
+      <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-green-50/50 rounded-full blur-[120px]"></div>
     </div>
 
     <div className="max-w-6xl mx-auto relative z-10">
       <Reveal className="text-center mb-20 space-y-4">
-        <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight">Benefícios Que Transformam</h2>
+        <h2 className="text-3xl md:text-5xl font-bold text-slate-900 tracking-tight">Benefícios Que Transformam</h2>
         <div className="w-24 h-1.5 bg-green-500 mx-auto rounded-full shadow-[0_0_15px_rgba(34,197,94,0.5)]"></div>
-        <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto">Muito mais do que atividades, uma ferramenta completa para o ensino bíblico.</p>
+        <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto">Muito mais do que atividades, uma ferramenta completa para o ensino bíblico.</p>
       </Reveal>
       
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -384,7 +402,7 @@ const Benefits = () => (
           }
         ].map((benefit, idx) => (
           <Reveal key={idx} delay={idx * 100} variant="up">
-            <div className="group relative p-8 md:p-10 bg-slate-900/40 border border-slate-800 rounded-3xl hover:border-green-500/50 transition-all duration-500 h-full flex flex-col items-start text-left overflow-hidden">
+            <div className="group relative p-8 md:p-10 bg-white border border-slate-200 shadow-sm rounded-3xl hover:border-green-500 transition-all duration-500 h-full flex flex-col items-start text-left overflow-hidden">
               {/* Top Glow Line */}
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-green-500 rounded-b-full shadow-[0_0_15px_rgba(34,197,94,0.8)] group-hover:w-24 transition-all duration-500"></div>
               
@@ -393,8 +411,8 @@ const Benefits = () => (
                 {React.cloneElement(benefit.icon as React.ReactElement<any>, { size: 24, className: "text-green-500" })}
               </div>
               
-              <h4 className="text-xl md:text-2xl font-bold text-white mb-4 group-hover:text-green-400 transition-colors">{benefit.title}</h4>
-              <p className="text-slate-400 leading-relaxed text-base md:text-lg">
+              <h4 className="text-xl md:text-2xl font-bold text-slate-800 mb-4 group-hover:text-green-600 transition-colors">{benefit.title}</h4>
+              <p className="text-slate-600 leading-relaxed text-base md:text-lg">
                 {benefit.desc}
               </p>
             </div>
@@ -446,61 +464,64 @@ const Bonuses = () => {
       </div>
 
       <div className="max-w-6xl mx-auto relative z-10">
-        <Reveal className="text-center mb-20 space-y-6">
-          <div className="inline-flex items-center gap-2 px-5 py-2 bg-yellow-400/20 text-green-800 rounded-full text-xs font-black uppercase tracking-widest border border-yellow-400/30">
-            <Gift size={14} className="text-green-600" /> Bônus Exclusivos para você
+        <Reveal className="text-center mb-16 space-y-4">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-yellow-400/20 text-green-800 rounded-full text-xs font-black uppercase tracking-widest border border-yellow-400/30">
+            <Gift size={14} className="text-green-600" /> Bônus Exclusivos
           </div>
-          <h2 className="text-4xl md:text-6xl font-bold text-slate-900 leading-tight">
-            Ganhe mais <span className="text-green-600">4 Presentes</span> <br className="hidden md:block"/> Especiais ao se inscrever hoje
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 leading-tight">
+            🎁 ATENÇÃO: Leve GRÁTIS <br className="hidden md:block"/> <span className="text-green-600">4 Bônus Exclusivos</span>
           </h2>
-          <div className="max-w-2xl mx-auto">
-            <p className="text-xl text-slate-500 font-medium">
-              Somente nesta oferta de hoje, incluímos recursos extras avaliados em <span className="text-slate-900 font-bold">R$ 110,00</span> totalmente de graça.
+          <div className="max-w-2xl mx-auto space-y-1">
+            <p className="text-xl text-slate-900 font-bold">
+              (Valor Total: R$ 110,00)
+            </p>
+            <p className="text-lg text-slate-500 font-medium">
+              Incluídos apenas no plano de R$27,90
             </p>
           </div>
         </Reveal>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8 lg:gap-12 mb-20 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6 lg:gap-8 mb-16 max-w-4xl mx-auto">
           {bonuses.map((bonus, idx) => (
             <Reveal key={bonus.id} delay={idx * 150} variant="up" className="h-full">
-              <div className="group relative bg-white p-8 md:p-10 rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_60px_rgba(0,0,0,0.1)] transition-all duration-500 flex flex-col h-full border border-slate-100">
+              <div className="group relative bg-white p-6 md:p-8 rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] transition-all duration-500 flex flex-col h-full border border-slate-100">
                 {/* Book Image */}
-                <div className="relative mb-8 flex justify-center">
-                  <div className="w-full max-w-[240px] aspect-[4/5] relative group-hover:scale-105 transition-transform duration-500">
+                <div className="relative mb-6 flex justify-center">
+                  <div className="w-full max-w-[180px] aspect-[4/5] relative group-hover:scale-105 transition-transform duration-500">
                     <img 
                       src={bonus.image} 
                       alt={bonus.title} 
-                      className="w-full h-full object-cover rounded-2xl shadow-2xl"
+                      className="w-full h-full object-cover rounded-xl shadow-xl"
                       referrerPolicy="no-referrer"
                     />
-                    <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-black/10"></div>
+                    <div className="absolute inset-0 rounded-xl ring-1 ring-inset ring-black/10"></div>
                   </div>
                 </div>
                 
                 {/* Label Row */}
-                <div className="flex justify-between items-center mb-4">
-                  <span className="text-[#1e3a8a] font-bold text-xl uppercase tracking-tight">
+                <div className="flex justify-between items-center mb-3">
+                  <span className="text-[#1e3a8a] font-bold text-lg uppercase tracking-tight">
                     BÔNUS {bonus.id}
                   </span>
-                  <span className="text-green-600 font-bold text-sm uppercase tracking-wider">
+                  <span className="text-green-600 font-bold text-xs uppercase tracking-wider">
                     HOJE: GRÁTIS
                   </span>
                 </div>
 
                 {/* Title */}
-                <h4 className="text-2xl font-bold text-slate-900 mb-2 leading-tight">
+                <h4 className="text-xl font-bold text-slate-900 mb-2 leading-tight">
                   {bonus.title}
                 </h4>
                 
                 {/* Value */}
-                <div className="mb-6">
-                  <span className="text-red-500 font-medium text-lg line-through opacity-80">
+                <div className="mb-4">
+                  <span className="text-red-500 font-medium text-base line-through opacity-80">
                     Valor: {bonus.value}
                   </span>
                 </div>
 
                 {/* Description */}
-                <p className="text-slate-600 text-lg leading-relaxed">
+                <p className="text-slate-600 text-base leading-relaxed">
                   {bonus.description}
                 </p>
               </div>
@@ -889,7 +910,7 @@ const Testimonials = () => {
     <section className="py-24 px-4 bg-green-50 overflow-hidden">
       <div className="max-w-6xl mx-auto">
         <Reveal className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">O Que Dizem Mães e Professoras</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Veja Como Este Kit Mudou a Vida de +12.000 Famílias</h2>
           <p className="text-lg text-slate-600">Histórias reais de transformação no ministério infantil</p>
         </Reveal>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
