@@ -23,6 +23,8 @@ import {
   Lock,
   Check,
   Gift,
+  Book,
+  Infinity,
   ArrowRight
 } from 'lucide-react';
 import { Testimonial, FAQItem, Bonus, Plan } from './types';
@@ -107,8 +109,11 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="bg-green-600 text-white py-2 text-center text-sm font-medium sticky top-0 z-50 shadow-md">
-      Desconto somente HOJE nesta página {dateStr || '--/--/----'}
+    <nav className="bg-green-600 text-white py-2 text-center text-[13px] sm:text-base font-bold relative z-50 shadow-md flex items-center justify-center gap-1 sm:gap-2 px-1 sm:px-4 tracking-tight sm:tracking-normal">
+      <Star className="w-3.5 h-3.5 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400 shrink-0" />
+      <span className="whitespace-nowrap">
+        Desconto somente <span className="text-yellow-300">HOJE</span> nesta página {dateStr || '14/03/2026'}
+      </span>
     </nav>
   );
 };
@@ -119,25 +124,25 @@ const Hero = () => (
     <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-96 h-96 bg-green-200 rounded-full opacity-30 blur-3xl"></div>
     
     <div className="max-w-4xl mx-auto flex flex-col items-center text-center relative z-10 space-y-8">
-      <Reveal variant="scale">
-        <div className="inline-flex items-center px-4 py-1.5 bg-yellow-100 text-yellow-800 rounded-full text-sm font-bold border border-yellow-200 shadow-sm animate-bounce">
-          🔥 OFERTA EXPIRA EM 24H
-        </div>
-      </Reveal>
       
       <Reveal delay={200}>
         <h1 className="text-2xl md:text-4xl font-bold text-green-800 leading-tight">
-          +650 Atividades Bíblicas para Fazer as Crianças Amarem a Palavra de Deus
+          +650 Atividades Bíblicas Prontas para Ministério Infantil e Ensino em Casa
         </h1>
+      </Reveal>
+
+      <Reveal delay={300}>
+        <p className="text-base md:text-lg text-slate-600 max-w-2xl">
+          Colorir, jogos, quizzes, histórias e muito mais. Imprima quantas vezes quiser.
+        </p>
       </Reveal>
 
       <Reveal variant="rotate" delay={400} className="max-w-2xl w-full">
         <div className="relative group">
-          <div className="absolute inset-0 bg-green-600 rounded-3xl rotate-1 group-hover:rotate-0 transition-transform"></div>
           <img 
-            src="https://i.postimg.cc/QtGDgt8k/Gemini-Generated-Image-jqs56ljqs56ljqs5.png" 
+            src="https://i.postimg.cc/VNR1vRTt/Chat-GPT-Image-15-de-mar-de-2026-18-34-28-(1).png" 
             alt="Exemplo das Atividades Bíblicas" 
-            className="relative rounded-3xl shadow-2xl transition-transform group-hover:-translate-y-1 w-full h-auto"
+            className="relative transition-transform group-hover:-translate-y-1 w-full h-auto drop-shadow-2xl"
           />
           <div className="absolute -bottom-4 -right-4 bg-yellow-400 p-4 rounded-xl shadow-xl border-4 border-white rotate-6 hidden sm:block">
             <p className="font-bold text-green-900 text-lg leading-none">PDF PRONTO</p>
@@ -147,26 +152,12 @@ const Hero = () => (
       </Reveal>
 
       <div className="space-y-6 w-full flex flex-col items-center">
-        <Reveal delay={600}>
-          <p className="text-lg md:text-xl text-slate-600 max-w-2xl">
-            Atividades prontas para imprimir e usar quantas vezes quiser. Produto digital com acesso imediato.
-          </p>
-        </Reveal>
-
-        <Reveal delay={700}>
-          <div className="flex flex-col items-center mt-2 mb-2">
-            <span className="text-slate-500 line-through text-lg font-medium">De R$ 39,90 por apenas</span>
-            <span className="text-5xl font-extrabold text-green-600 my-1">R$ 9,90</span>
-            <span className="text-sm font-bold text-slate-700 bg-yellow-100 px-4 py-1.5 rounded-full mt-2">Pagamento Único • Acesso Vitalício</span>
-          </div>
-        </Reveal>
-        
         <Reveal delay={800} variant="scale">
           <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
             <a 
               href="#plans" 
               onClick={handleCTAClick}
-              className="px-10 py-5 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white rounded-2xl text-xl font-bold shadow-xl transition-all transform hover:-translate-y-1 text-center animate-pulse-soft"
+              className="px-10 py-5 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white rounded-2xl text-xl font-bold shadow-xl transition-all transform hover:-translate-y-1 text-center animate-pulse-soft uppercase"
             >
               Quero Garantir o meu acesso agora
             </a>
@@ -182,6 +173,79 @@ const Hero = () => (
     </div>
   </header>
 );
+
+const WhatYouGet = () => {
+  const items = [
+    {
+      emoji: "📚",
+      title: "+650 Atividades Bíblicas",
+      description: "Colorir, jogos, quizzes, caça-palavras e histórias completas da Bíblia"
+    },
+    {
+      emoji: "📖",
+      title: "Histórias Completas",
+      description: "Da Criação até os ensinamentos de Jesus, todas as histórias importantes"
+    },
+    {
+      emoji: "🖨️",
+      title: "PDFs Prontos para Imprimir",
+      description: "Baixe e imprima quantas vezes quiser sem custo adicional"
+    },
+    {
+      emoji: "👶",
+      title: "Para Todas as Idades",
+      description: "Material adaptado para crianças de 4 a 10 anos"
+    },
+    {
+      emoji: "♾️",
+      title: "Acesso Vitalício",
+      description: "Use para sempre sem mensalidade ou taxas extras"
+    },
+    {
+      emoji: "🎁",
+      title: "4 Bônus Exclusivos",
+      description: "No valor de R$ 110,00 totalmente grátis"
+    },
+    {
+      emoji: "🔒",
+      title: "Garantia de 7 Dias",
+      description: "Satisfação garantida ou seu dinheiro de volta"
+    },
+    {
+      emoji: "⚡",
+      title: "Acesso Imediato",
+      description: "Receba tudo no seu e-mail assim que o pagamento for confirmado"
+    }
+  ];
+
+  return (
+    <section className="py-20 px-4 bg-slate-50/50 border-t border-slate-100">
+      <div className="max-w-5xl mx-auto">
+        <Reveal className="text-center mb-14">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 tracking-tight uppercase">
+            O Que Você Vai Receber
+          </h2>
+        </Reveal>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {items.map((item, index) => (
+            <Reveal key={index} delay={index * 100} variant="slide-up">
+              <div className="group bg-white p-5 rounded-2xl border-2 border-green-500 shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-5">
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200/60 shrink-0 flex items-center justify-center text-2xl group-hover:scale-110 group-hover:from-green-50 group-hover:to-emerald-100/50 group-hover:border-green-200 transition-all duration-300 shadow-sm">
+                  {item.emoji}
+                </div>
+                <div>
+                  <h3 className="text-base font-semibold text-slate-900 mb-1">{item.title}</h3>
+                  <p className="text-sm text-slate-500 leading-relaxed">{item.description}</p>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
 
 const Stats = () => (
   <section className="bg-white py-12 border-y border-slate-100 overflow-hidden">
@@ -204,29 +268,6 @@ const Stats = () => (
 );
 
 const Features = () => {
-  const featureList = [
-    {
-      title: "Histórias Bíblicas Completas",
-      description: "Desde a Criação até os ensinamentos de Jesus, com atividades para cada história importante.",
-      icon: <BookOpen className="w-8 h-8 text-green-600" />
-    },
-    {
-      title: "Adequado Para Todas as Idades",
-      description: "Material adaptado para crianças de 4 a 10 anos, com diferentes níveis de desenvolvimento.",
-      icon: <Users className="text-green-600" />
-    },
-    {
-      title: "PDF Pronto Para Imprimir",
-      description: "Baixe imediatamente e imprima quantas vezes quiser, sem custo adicional recorrente.",
-      icon: <Printer className="text-green-600" />
-    },
-    {
-      title: "Economize Horas de Preparação",
-      description: "Material profissional pronto sem precisar criar do zero. Foque na conexão espiritual com os pequenos.",
-      icon: <Clock className="text-green-600" />
-    }
-  ];
-
   const sampleImages = [
     "https://i.postimg.cc/Z5vK6XPR/Davi-e-Golias-coloring-page-625eb147-J-86UVbc.webp",
     "https://i.postimg.cc/rwRF57Gs/Sementinhas-de-Cristo-A-arca-de-Noe-36-page-0001-1763755786865-Co-NFXEOy.webp",
@@ -236,25 +277,6 @@ const Features = () => {
   return (
     <section className="py-24 px-4 bg-white">
       <div className="max-w-6xl mx-auto">
-        <Reveal className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Veja Exemplos do Material</h2>
-          <p className="text-lg text-slate-600">Recursos pedagógicos planejados para o ensino cristão</p>
-        </Reveal>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
-          {featureList.map((feature, idx) => (
-            <Reveal key={idx} delay={idx * 150} variant="up">
-              <div className="bg-slate-50 p-8 rounded-[2rem] border border-slate-100 hover:border-green-300 hover:bg-white transition-all group shadow-sm hover:shadow-md h-full">
-                <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:bg-green-600 group-hover:text-white transition-colors">
-                  {React.cloneElement(feature.icon as React.ReactElement<any>, { className: "group-hover:text-white transition-colors", size: 32 })}
-                </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">{feature.title}</h3>
-                <p className="text-slate-600 leading-relaxed text-sm">{feature.description}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-
         <Reveal className="text-center mb-12">
           <h3 className="text-2xl font-bold text-green-800">Uma amostra do que você encontrará no kit:</h3>
         </Reveal>
@@ -278,7 +300,7 @@ const Features = () => {
           <a 
             href="#plans" 
             onClick={handleCTAClick}
-            className="px-10 py-5 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white rounded-2xl text-xl font-bold shadow-xl transition-all transform hover:-translate-y-1 text-center flex items-center gap-2"
+            className="px-10 py-5 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white rounded-2xl text-xl font-bold shadow-xl transition-all transform hover:-translate-y-1 text-center flex items-center gap-2 uppercase"
           >
             Garantir esse material agora <ArrowRight className="w-6 h-6" />
           </a>
@@ -297,20 +319,20 @@ const IdealFor = () => (
       
       <div className="grid md:grid-cols-2 gap-12">
         <Reveal variant="left" threshold={0.2} className="h-full">
-          <div className="bg-white p-8 md:p-12 rounded-3xl shadow-sm border border-green-100 h-full">
-            <h3 className="text-2xl font-bold text-green-600 mb-8 flex items-center gap-3">
+          <div className="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-green-100 h-full">
+            <h3 className="text-xl font-bold text-green-600 mb-6 flex items-center gap-3">
               Este Kit É Para Você Se:
             </h3>
-            <ul className="space-y-6">
+            <ul className="space-y-4">
               {[
                 "Você trabalha no ministério infantil e precisa de material de qualidade",
                 "Deseja ensinar a Bíblia para seus filhos de forma divertida e eficaz",
                 "Não tem tempo para criar atividades do zero toda semana",
                 "Quer aproximar as crianças da Palavra de Deus com criatividade"
               ].map((item, idx) => (
-                <li key={idx} className="flex gap-4 items-start">
-                  <CheckCircle2 className="w-6 h-6 text-green-500 shrink-0 mt-1" />
-                  <span className="text-slate-700 font-medium text-lg">{item}</span>
+                <li key={idx} className="flex gap-3 items-start">
+                  <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
+                  <span className="text-slate-700 font-medium text-base">{item}</span>
                 </li>
               ))}
             </ul>
@@ -318,11 +340,11 @@ const IdealFor = () => (
         </Reveal>
         
         <Reveal variant="right" threshold={0.2} className="h-full">
-          <div className="bg-white p-8 md:p-12 rounded-3xl shadow-sm border border-red-100 h-full">
-            <h3 className="text-2xl font-bold text-red-500 mb-8 flex items-center gap-3">
+          <div className="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-red-100 h-full">
+            <h3 className="text-xl font-bold text-red-500 mb-6 flex items-center gap-3">
               Não É Para Você Se:
             </h3>
-            <ul className="space-y-6">
+            <ul className="space-y-4">
               {[
                 "Você não se importa com o crescimento espiritual das crianças",
                 "Não possui 10 minutos por dia para aplicar as atividades",
@@ -330,9 +352,9 @@ const IdealFor = () => (
                 "Não valoriza ensino bíblico estruturado e de qualidade",
                 "Busca material secular sem fundamento bíblico"
               ].map((item, idx) => (
-                <li key={idx} className="flex gap-4 items-start">
-                  <XCircle className="w-6 h-6 text-red-400 shrink-0 mt-1" />
-                  <span className="text-slate-700 font-medium text-lg">{item}</span>
+                <li key={idx} className="flex gap-3 items-start">
+                  <XCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
+                  <span className="text-slate-600 font-medium text-base">{item}</span>
                 </li>
               ))}
             </ul>
@@ -344,7 +366,7 @@ const IdealFor = () => (
         <a 
           href="#plans" 
           onClick={handleCTAClick}
-          className="px-10 py-5 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white rounded-2xl text-xl font-bold shadow-xl transition-all transform hover:-translate-y-1 text-center animate-pulse-soft"
+          className="px-10 py-5 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white rounded-2xl text-xl font-bold shadow-xl transition-all transform hover:-translate-y-1 text-center animate-pulse-soft uppercase"
         >
           Sim, esse kit é para mim
         </a>
@@ -402,17 +424,17 @@ const Benefits = () => (
           }
         ].map((benefit, idx) => (
           <Reveal key={idx} delay={idx * 100} variant="up">
-            <div className="group relative p-8 md:p-10 bg-white border border-slate-200 shadow-sm rounded-3xl hover:border-green-500 transition-all duration-500 h-full flex flex-col items-start text-left overflow-hidden">
+            <div className="group relative p-6 md:p-8 bg-white border border-slate-200 shadow-sm rounded-3xl hover:border-green-500 transition-all duration-500 h-full flex flex-col items-start text-left overflow-hidden">
               {/* Top Glow Line */}
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-green-500 rounded-b-full shadow-[0_0_15px_rgba(34,197,94,0.8)] group-hover:w-24 transition-all duration-500"></div>
               
               {/* Icon Box */}
-              <div className="w-12 h-12 border border-green-500/30 rounded-xl flex items-center justify-center mb-8 bg-green-500/5 group-hover:bg-green-500/10 group-hover:border-green-500/60 transition-all duration-300">
-                {React.cloneElement(benefit.icon as React.ReactElement<any>, { size: 24, className: "text-green-500" })}
+              <div className="w-10 h-10 border border-green-500/30 rounded-xl flex items-center justify-center mb-6 bg-green-500/5 group-hover:bg-green-500/10 group-hover:border-green-500/60 transition-all duration-300">
+                {React.cloneElement(benefit.icon as React.ReactElement<any>, { size: 20, className: "text-green-500" })}
               </div>
               
-              <h4 className="text-xl md:text-2xl font-bold text-slate-800 mb-4 group-hover:text-green-600 transition-colors">{benefit.title}</h4>
-              <p className="text-slate-600 leading-relaxed text-base md:text-lg">
+              <h4 className="text-lg md:text-xl font-bold text-slate-800 mb-3 group-hover:text-green-600 transition-colors">{benefit.title}</h4>
+              <p className="text-slate-600 leading-relaxed text-sm md:text-base">
                 {benefit.desc}
               </p>
             </div>
@@ -465,9 +487,6 @@ const Bonuses = () => {
 
       <div className="max-w-6xl mx-auto relative z-10">
         <Reveal className="text-center mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-yellow-400/20 text-green-800 rounded-full text-xs font-black uppercase tracking-widest border border-yellow-400/30">
-            <Gift size={14} className="text-green-600" /> Bônus Exclusivos
-          </div>
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 leading-tight">
             🎁 ATENÇÃO: Leve GRÁTIS <br className="hidden md:block"/> <span className="text-green-600">4 Bônus Exclusivos</span>
           </h2>
@@ -531,9 +550,9 @@ const Bonuses = () => {
 
         <Reveal delay={800} variant="scale" className="text-center">
            <a 
-            href="#plans" 
+            href="#premium-plan" 
             onClick={handleCTAClick}
-            className="inline-block px-12 py-5 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white rounded-2xl text-xl font-bold shadow-xl transition-all transform hover:-translate-y-1 text-center animate-pulse-soft"
+            className="inline-block px-12 py-5 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white rounded-2xl text-xl font-bold shadow-xl transition-all transform hover:-translate-y-1 text-center animate-pulse-soft uppercase"
            >
               Quero os bônus
            </a>
@@ -640,7 +659,7 @@ const UpsellModal: React.FC<{
               
               <a 
                 href={basicUrl}
-                className="block text-[#666] hover:text-[#2D8659] font-bold text-xs underline underline-offset-4 transition-colors"
+                className="block text-[#666] hover:text-[#2D8659] font-bold text-xs underline underline-offset-4 transition-colors uppercase"
               >
                 Não, quero continuar apenas com o Plano Básico (R$ 9,90)
               </a>
@@ -695,40 +714,40 @@ const Pricing = () => {
         <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
           {/* Plan Básico */}
           <Reveal delay={0} variant="scale" className="flex h-full">
-            <div className="relative w-full flex flex-col bg-white rounded-[2.5rem] p-8 md:p-12 shadow-2xl transition-all duration-300 hover:shadow-xl group border border-slate-200">
-              <div className="flex flex-col items-center mb-10">
-                <div className="bg-slate-100 text-slate-500 px-6 py-1.5 rounded-full font-bold text-[10px] uppercase tracking-[0.2em] mb-8">
+            <div className="relative w-full flex flex-col bg-white rounded-[2rem] p-6 md:p-8 shadow-2xl transition-all duration-300 hover:shadow-xl group border border-slate-200">
+              <div className="flex flex-col items-center mb-8">
+                <div className="bg-slate-100 text-slate-500 px-5 py-1 rounded-full font-bold text-[10px] uppercase tracking-[0.2em] mb-6">
                   Plano Básico
                 </div>
-                <h3 className="text-4xl font-bold text-slate-900 mb-2 tracking-tight">Plano Básico</h3>
-                <p className="text-slate-500 text-sm font-medium mb-10">O essencial para começar</p>
+                <h3 className="text-3xl font-bold text-slate-900 mb-2 tracking-tight">Plano Básico</h3>
+                <p className="text-slate-500 text-sm font-medium mb-8">O essencial para começar</p>
                 
                 <div className="flex flex-col items-center text-center">
-                  <span className="text-slate-400 line-through text-lg font-bold mb-1">R$ 39,90</span>
+                  <span className="text-slate-400 line-through text-base font-bold mb-1">R$ 39,90</span>
                   <div className="flex items-baseline gap-1">
-                    <span className="text-slate-900 text-5xl font-black tracking-tighter">R$ 9,90</span>
+                    <span className="text-slate-900 text-4xl font-black tracking-tighter">R$ 9,90</span>
                   </div>
                   <span className="text-slate-400 text-[10px] font-bold uppercase tracking-widest mt-2">Pagamento Único</span>
                 </div>
               </div>
               
-              <div className="flex-grow space-y-4 mb-12">
-                <div className="flex gap-4 items-center">
+              <div className="flex-grow space-y-4 mb-10">
+                <div className="flex gap-3 items-center">
                   <div className="bg-green-100 p-0.5 rounded-full shrink-0">
                     <Check className="w-4 h-4 text-green-600" strokeWidth={4} />
                   </div>
-                  <span className="text-slate-700 font-bold text-xl leading-snug">Atividades Bíblicas prontas para imprimir</span>
+                  <span className="text-slate-700 font-bold text-lg leading-snug">Atividades Bíblicas prontas para imprimir</span>
                 </div>
               </div>
               
               <div className="mt-auto">
                 <button 
                   onClick={handleBasicClick}
-                  className="block w-full py-5 rounded-2xl text-base font-black bg-gradient-to-r from-slate-900 to-slate-800 hover:from-black hover:to-slate-900 text-white transition-all transform active:scale-95 uppercase tracking-wider shadow-xl text-center"
+                  className="block w-full py-4 rounded-xl text-base font-black bg-gradient-to-r from-slate-900 to-slate-800 hover:from-black hover:to-slate-900 text-white transition-all transform active:scale-95 uppercase tracking-wider shadow-xl text-center"
                 >
                   Garantir Plano Básico
                 </button>
-                <div className="mt-8 flex justify-center items-center gap-2 text-slate-400 font-bold text-[10px] uppercase tracking-widest">
+                <div className="mt-6 flex justify-center items-center gap-2 text-slate-400 font-bold text-[10px] uppercase tracking-widest">
                   <Lock size={12} /> Compra 100% Segura
                 </div>
               </div>
@@ -737,34 +756,40 @@ const Pricing = () => {
 
           {/* Plan Premium */}
           <Reveal delay={300} variant="scale" className="flex h-full">
-            <div className="relative w-full flex flex-col bg-white rounded-[2.5rem] p-8 md:p-12 shadow-2xl transition-all duration-300 border-4 border-green-500 group overflow-hidden">
+            <div id="premium-plan" className="relative w-full flex flex-col bg-white rounded-[2rem] p-6 md:p-8 shadow-2xl transition-all duration-300 border-4 border-green-500 group overflow-hidden scroll-mt-24">
               {/* Mais Popular Ribbon */}
-              <div className="absolute top-0 right-0 overflow-hidden w-32 h-32 pointer-events-none">
-                <div className="absolute top-[26px] right-[-28px] rotate-45 bg-yellow-400 text-green-900 text-[10px] font-black px-10 py-1.5 uppercase tracking-tighter shadow-lg w-[160px] text-center">
+              <div className="absolute top-0 right-0 overflow-hidden w-28 h-28 pointer-events-none">
+                <div className="absolute top-[22px] right-[-28px] rotate-45 bg-yellow-400 text-green-900 text-[9px] font-black px-10 py-1 uppercase tracking-tighter shadow-lg w-[150px] text-center">
                   Mais Popular
                 </div>
               </div>
 
-              <div className="flex flex-col items-center mb-10">
-                <div className="bg-green-600 text-white px-6 py-1.5 rounded-full font-bold text-[10px] uppercase tracking-[0.2em] mb-8 shadow-sm">
+              <div className="flex flex-col items-center mb-8">
+                <div className="bg-green-600 text-white px-5 py-1 rounded-full font-bold text-[10px] uppercase tracking-[0.2em] mb-4 shadow-sm">
                   Plano Premium
                 </div>
-                <h3 className="text-4xl font-bold text-slate-900 mb-2 tracking-tight">Plano Premium</h3>
-                <p className="text-slate-500 text-sm font-medium mb-10 text-center">Experiência máxima Sementinhas de Fé</p>
+                <img 
+                  src="https://i.postimg.cc/VNR1vRTt/Chat-GPT-Image-15-de-mar-de-2026-18-34-28-(1).png" 
+                  alt="Kit Completo Sementinhas de Fé" 
+                  className="w-full max-w-[320px] object-contain mb-4 hover:scale-105 transition-transform duration-500 drop-shadow-xl"
+                  referrerPolicy="no-referrer"
+                />
+                <h3 className="text-3xl font-bold text-slate-900 mb-2 tracking-tight">Plano Premium</h3>
+                <p className="text-slate-500 text-sm font-medium mb-8 text-center">Experiência máxima Sementinhas de Fé</p>
                 
                 <div className="flex flex-col items-center text-center relative">
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="text-slate-400 line-through text-lg font-bold">R$ 197,90</span>
+                    <span className="text-slate-400 line-through text-base font-bold">R$ 197,90</span>
                     <span className="bg-red-100 text-red-600 text-[10px] font-black px-2 py-0.5 rounded uppercase">-90% OFF</span>
                   </div>
                   <div className="flex items-baseline gap-1">
-                    <span className="text-green-600 text-6xl font-black tracking-tighter">R$ 27,00</span>
+                    <span className="text-green-600 text-5xl font-black tracking-tighter">R$ 27,90</span>
                   </div>
                   <span className="text-slate-400 text-[10px] font-bold uppercase tracking-widest mt-2">Pagamento Único</span>
                 </div>
               </div>
               
-              <div className="flex-grow space-y-4 mb-12">
+              <div className="flex-grow space-y-3 mb-10">
                 {[
                   "Tudo do plano básico",
                   "+650 Atividades Bíblicas prontas",
@@ -773,11 +798,11 @@ const Pricing = () => {
                   "TODOS os 4 Bônus inclusos",
                   "Suporte prioritário via email"
                 ].map((item, idx) => (
-                  <div key={idx} className="flex gap-4 items-center">
+                  <div key={idx} className="flex gap-3 items-center">
                     <div className="bg-green-500 p-0.5 rounded-full shrink-0">
-                      <Check className="w-4 h-4 text-white" strokeWidth={4} />
+                      <Check className="w-3 h-3 text-white" strokeWidth={4} />
                     </div>
-                    <span className="text-slate-800 font-bold text-xl tracking-tight leading-tight">{item}</span>
+                    <span className="text-slate-800 font-bold text-lg tracking-tight leading-tight">{item}</span>
                   </div>
                 ))}
               </div>
@@ -785,12 +810,12 @@ const Pricing = () => {
               <div className="mt-auto">
                 <a 
                   href={getCheckoutUrl("https://ggcheckout.com.br/checkout/v5/7wOe47g8XVzL1HnjKopl")}
-                  className="block w-full py-6 rounded-2xl text-lg font-black bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white transition-all transform active:scale-95 uppercase tracking-widest shadow-xl shadow-green-100 animate-pulse-soft text-center"
+                  className="block w-full py-4 rounded-xl text-base font-black bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white transition-all transform active:scale-95 uppercase tracking-widest shadow-xl shadow-green-100 animate-pulse-soft text-center"
                 >
                   Garantir Plano Premium
                 </a>
-                <div className="mt-8 flex justify-center items-center gap-4 text-slate-400 font-bold text-[10px] uppercase tracking-widest">
-                  <div className="flex items-center gap-1.5"><Lock size={12} className="text-green-500" /> Compra 100% Segura</div>
+                <div className="mt-6 flex justify-center items-center gap-3 text-slate-400 font-bold text-[9px] uppercase tracking-widest">
+                  <div className="flex items-center gap-1"><Lock size={10} className="text-green-500" /> Compra 100% Segura</div>
                   <div className="w-1 h-1 bg-slate-200 rounded-full"></div>
                   <div>Garantia de 7 Dias</div>
                 </div>
@@ -804,39 +829,39 @@ const Pricing = () => {
 };
 
 const Guarantee = () => (
-  <section className="py-24 px-4 bg-white overflow-hidden">
+  <section className="py-8 px-4 bg-white overflow-hidden">
     <Reveal variant="scale" threshold={0.3}>
-      <div className="max-w-5xl mx-auto bg-gradient-to-br from-green-50 to-white rounded-[4rem] p-10 md:p-20 border border-green-100 shadow-2xl shadow-green-100/50 relative">
-        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-yellow-200/30 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-64 h-64 bg-green-200/30 rounded-full blur-3xl"></div>
+      <div className="max-w-4xl mx-auto bg-gradient-to-br from-green-50 to-white rounded-3xl p-6 md:p-8 border border-green-100 shadow-2xl shadow-green-100/50 relative">
+        <div className="absolute top-0 right-0 -mr-10 -mt-10 w-48 h-48 bg-yellow-200/30 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 -ml-10 -mb-10 w-48 h-48 bg-green-200/30 rounded-full blur-3xl"></div>
         
-        <div className="relative z-10 flex flex-col md:flex-row items-center gap-12">
+        <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
           <div className="w-full md:w-1/3 flex justify-center">
             <img 
               src="https://www.imagemhost.com.br/images/2025/04/17/Selo_de_Garantia_de_7_Dias_PNG_Transparente_Sem_Fundo.png" 
               alt="Selo de Garantia 7 Dias" 
-              className="w-64 h-auto drop-shadow-2xl animate-bounce-subtle"
+              className="w-40 md:w-48 h-auto drop-shadow-2xl animate-bounce-subtle"
             />
           </div>
-          <div className="w-full md:w-2/3 text-center md:text-left space-y-6">
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 leading-tight">
+          <div className="w-full md:w-2/3 text-center md:text-left space-y-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 leading-tight">
               Satisfação Garantida: <span className="text-green-600">Seu Risco é Zero</span>
             </h2>
-            <p className="text-xl text-slate-600 leading-relaxed">
+            <p className="text-lg text-slate-600 leading-relaxed">
               Estamos tão confiantes na qualidade do material <span className="font-bold text-green-700">Sementinhas de Fé</span> que oferecemos uma garantia incondicional. 
               Você tem <span className="font-bold text-slate-900 underline decoration-yellow-400 decoration-4 underline-offset-4">7 dias inteiros</span> para explorar cada atividade. 
             </p>
-            <p className="text-lg text-slate-600">
+            <p className="text-base text-slate-600">
               Se por qualquer motivo você achar que o kit não é para você, basta nos enviar um e-mail e <span className="font-bold">devolvemos 100% do seu dinheiro</span>. Sem burocracia, sem perguntas e continuamos amigos.
             </p>
-            <div className="flex flex-wrap justify-center md:justify-start gap-4 pt-4 mb-6">
-               <div className="flex items-center gap-2 px-4 py-2 bg-white rounded-full border border-green-100 shadow-sm">
-                 <ShieldCheck className="w-5 h-5 text-green-500" />
-                 <span className="text-sm font-bold text-slate-700 uppercase tracking-wider">Compra Protegida</span>
+            <div className="flex flex-wrap justify-center md:justify-start gap-3 pt-2 mb-4">
+               <div className="flex items-center gap-2 px-3 py-1.5 bg-white rounded-full border border-green-100 shadow-sm">
+                 <ShieldCheck className="w-4 h-4 text-green-500" />
+                 <span className="text-xs font-bold text-slate-700 uppercase tracking-wider">Compra Protegida</span>
                </div>
-               <div className="flex items-center gap-2 px-4 py-2 bg-white rounded-full border border-green-100 shadow-sm">
-                 <CheckCircle2 className="w-5 h-5 text-green-500" />
-                 <span className="text-sm font-bold text-slate-700 uppercase tracking-wider">Reembolso Facilitado</span>
+               <div className="flex items-center gap-2 px-3 py-1.5 bg-white rounded-full border border-green-100 shadow-sm">
+                 <CheckCircle2 className="w-4 h-4 text-green-500" />
+                 <span className="text-xs font-bold text-slate-700 uppercase tracking-wider">Reembolso Facilitado</span>
                </div>
             </div>
 
@@ -844,9 +869,9 @@ const Guarantee = () => (
                <a 
                 href="#plans" 
                 onClick={handleCTAClick}
-                className="px-8 py-4 bg-gradient-to-r from-slate-900 to-slate-800 hover:from-black hover:to-slate-900 text-white rounded-xl font-bold shadow-lg transition-transform hover:scale-105 flex items-center gap-2"
+                className="px-6 py-3 bg-gradient-to-r from-slate-900 to-slate-800 hover:from-black hover:to-slate-900 text-white rounded-xl font-bold shadow-lg transition-transform hover:scale-105 flex items-center gap-2 uppercase text-sm"
                >
-                 Garantir meu risco zero <ArrowRight size={20} />
+                 Garantir meu risco zero <ArrowRight size={18} />
                </a>
             </Reveal>
           </div>
@@ -869,7 +894,7 @@ const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="py-24 px-4 bg-white border-t border-slate-100">
+    <section className="py-12 px-4 bg-white border-t border-slate-100">
       <div className="max-w-3xl mx-auto">
         <Reveal className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Perguntas Frequentes</h2>
@@ -962,6 +987,7 @@ const App: React.FC = () => {
       <Navbar />
       <Hero />
       <Stats />
+      <WhatYouGet />
       <Features />
       <Testimonials />
       <Benefits />
@@ -987,7 +1013,7 @@ const App: React.FC = () => {
             <a 
               href="#plans" 
               onClick={handleCTAClick}
-              className="inline-block px-12 py-6 bg-green-600 hover:bg-green-700 text-white rounded-2xl text-2xl font-bold shadow-2xl transition-all transform hover:scale-105 active:scale-95 animate-pulse-soft"
+              className="inline-block px-12 py-6 bg-green-600 hover:bg-green-700 text-white rounded-2xl text-2xl font-bold shadow-2xl transition-all transform hover:scale-105 active:scale-95 animate-pulse-soft uppercase"
             >
               Quero Garantir o meu acesso agora
             </a>
