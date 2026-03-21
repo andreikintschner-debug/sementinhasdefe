@@ -25,7 +25,8 @@ import {
   Gift,
   Book,
   Infinity,
-  ArrowRight
+  ArrowRight,
+  Hourglass
 } from 'lucide-react';
 import { Testimonial, FAQItem, Bonus, Plan } from './types';
 
@@ -118,56 +119,132 @@ const Navbar = () => {
   );
 };
 
+const WistiaPlayer = ({ mediaId }: { mediaId: string }) => {
+  useEffect(() => {
+    const script1 = document.createElement('script');
+    script1.src = 'https://fast.wistia.com/player.js';
+    script1.async = true;
+    document.body.appendChild(script1);
+
+    const script2 = document.createElement('script');
+    script2.src = `https://fast.wistia.com/embed/${mediaId}.js`;
+    script2.async = true;
+    script2.type = 'module';
+    document.body.appendChild(script2);
+  }, [mediaId]);
+
+  return (
+    <div className="w-full relative rounded-2xl overflow-hidden shadow-2xl z-10 border-4 border-white/20">
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          wistia-player[media-id='${mediaId}']:not(:defined) { 
+            background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/${mediaId}/swatch'); 
+            display: block; 
+            filter: blur(5px); 
+            padding-top:56.25%; 
+          }
+        `
+      }} />
+      {React.createElement('wistia-player', { 'media-id': mediaId, aspect: '1.7777777777777777' })}
+    </div>
+  );
+};
+
 const Hero = () => (
-  <header className="relative bg-soft-gradient pt-12 pb-20 px-4 overflow-hidden">
-    <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-yellow-200 rounded-full opacity-30 blur-3xl"></div>
-    <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-96 h-96 bg-green-200 rounded-full opacity-30 blur-3xl"></div>
+  <header className="relative bg-gradient-to-b from-[#429D5B] via-[#90C895] to-white pt-16 pb-20 px-4 overflow-hidden">
+    {/* Decorative background elements to simulate the illustration */}
+    <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+      <div className="absolute -top-20 -left-20 w-96 h-96 bg-white/20 rounded-full blur-3xl"></div>
+      <div className="absolute top-20 right-10 w-80 h-80 bg-yellow-200/20 rounded-full blur-3xl"></div>
+    </div>
     
-    <div className="max-w-4xl mx-auto flex flex-col items-center text-center relative z-10 space-y-8">
+    <div className="max-w-6xl mx-auto flex flex-col items-center text-center relative z-10 space-y-8">
       
       <Reveal delay={200}>
-        <h1 className="text-2xl md:text-4xl font-bold text-green-800 leading-tight">
+        <h1 className="text-3xl md:text-5xl lg:text-[54px] font-bold text-white leading-[1.15] drop-shadow-md max-w-4xl mx-auto">
           +650 Atividades Bíblicas Prontas para Ministério Infantil e Ensino em Casa
         </h1>
       </Reveal>
 
       <Reveal delay={300}>
-        <p className="text-base md:text-lg text-slate-600 max-w-2xl">
+        <p className="text-lg md:text-2xl text-white/95 max-w-3xl font-medium drop-shadow-sm">
           Colorir, jogos, quizzes, histórias e muito mais. Imprima quantas vezes quiser.
         </p>
       </Reveal>
 
-      <Reveal variant="rotate" delay={400} className="max-w-2xl w-full">
-        <div className="relative group">
-          <img 
-            src="https://i.postimg.cc/VNR1vRTt/Chat-GPT-Image-15-de-mar-de-2026-18-34-28-(1).png" 
-            alt="Exemplo das Atividades Bíblicas" 
-            className="relative transition-transform group-hover:-translate-y-1 w-full h-auto drop-shadow-2xl"
-          />
-          <div className="absolute -bottom-4 -right-4 bg-yellow-400 p-4 rounded-xl shadow-xl border-4 border-white rotate-6 hidden sm:block">
-            <p className="font-bold text-green-900 text-lg leading-none">PDF PRONTO</p>
-            <p className="text-green-800 font-medium text-sm">PARA IMPRIMIR</p>
+      <Reveal variant="scale" delay={400} className="w-full max-w-4xl relative mt-8">
+        <div className="relative flex justify-center">
+          <WistiaPlayer mediaId="1etogojhil" />
+          {/* Badge */}
+          <div className="absolute -top-4 -right-4 md:top-[-5%] md:right-[-5%] bg-[#FFDE59] text-slate-900 px-3 py-1.5 rounded-lg shadow-lg flex items-center gap-2 z-20 border-2 border-white transform rotate-3">
+            <div className="bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded flex items-center justify-center">
+              VÍDEO
+            </div>
+            <div className="flex flex-col text-left leading-[1.1]">
+              <span className="text-[10px] font-extrabold uppercase">Assista</span>
+              <span className="text-[10px] font-extrabold uppercase">Agora</span>
+            </div>
           </div>
         </div>
       </Reveal>
 
-      <div className="space-y-6 w-full flex flex-col items-center">
-        <Reveal delay={800} variant="scale">
-          <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
+      <div className="w-full pt-10">
+        <Reveal delay={600} variant="slide-up">
+          <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12">
+            
+            {/* Left Badge */}
+            <div className="hidden lg:flex items-center gap-3 text-green-900">
+              <ShieldCheck className="w-10 h-10 opacity-90" strokeWidth={1.5} />
+              <div className="flex flex-col text-left leading-tight">
+                <span className="text-sm opacity-90">Compra</span>
+                <span className="text-base font-bold">100% Segura</span>
+              </div>
+            </div>
+            
+            {/* CTA Button */}
             <a 
               href="#plans" 
               onClick={handleCTAClick}
-              className="px-10 py-5 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white rounded-2xl text-xl font-bold shadow-xl transition-all transform hover:-translate-y-1 text-center animate-pulse-soft uppercase"
+              className="px-8 md:px-12 py-4 md:py-5 bg-gradient-to-b from-[#6BBA75] to-[#3A8B50] hover:from-[#75C680] hover:to-[#429D5B] text-white rounded-full text-lg md:text-xl font-bold border border-white/30 transition-all text-center uppercase tracking-wide w-full md:w-auto animate-pulse-button"
             >
               Quero Garantir o meu acesso agora
             </a>
+
+            {/* Right Badges */}
+            <div className="hidden lg:flex items-center gap-8">
+              <div className="flex items-center gap-3 text-green-900">
+                <Hourglass className="w-10 h-10 opacity-90" strokeWidth={1.5} />
+                <div className="flex flex-col text-left leading-tight">
+                  <span className="text-sm opacity-90">Acesso</span>
+                  <span className="text-base font-bold">Imediato</span>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 text-green-900">
+                <CheckCircle2 className="w-10 h-10 opacity-90" strokeWidth={1.5} />
+                <div className="flex flex-col text-left leading-tight">
+                  <span className="text-sm opacity-90">Garantia</span>
+                  <span className="text-base font-bold">de 7 Dias</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Mobile Badges */}
+            <div className="flex lg:hidden flex-wrap justify-center gap-6 text-green-900 mt-4">
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="w-6 h-6" />
+                <span className="text-sm font-bold">100% Segura</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Hourglass className="w-6 h-6" />
+                <span className="text-sm font-bold">Acesso Imediato</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-6 h-6" />
+                <span className="text-sm font-bold">Garantia 7 Dias</span>
+              </div>
+            </div>
+
           </div>
-        </Reveal>
-        
-        <Reveal delay={1000} className="flex flex-wrap gap-6 pt-2 text-slate-500 text-sm font-medium justify-center">
-          <span className="flex items-center gap-1.5"><ShieldCheck className="w-5 h-5 text-green-500" /> Compra 100% Segura</span>
-          <span className="flex items-center gap-1.5"><Zap className="w-5 h-5 text-green-500" /> Acesso Imediato</span>
-          <span className="flex items-center gap-1.5"><CheckCircle2 className="w-5 h-5 text-green-500" /> Garantia de 7 Dias</span>
         </Reveal>
       </div>
     </div>
@@ -177,66 +254,60 @@ const Hero = () => (
 const WhatYouGet = () => {
   const items = [
     {
-      emoji: "📚",
-      title: "+650 Atividades Bíblicas",
-      description: "Colorir, jogos, quizzes, caça-palavras e histórias completas da Bíblia"
-    },
-    {
-      emoji: "📖",
-      title: "Histórias Completas",
-      description: "Da Criação até os ensinamentos de Jesus, todas as histórias importantes"
-    },
-    {
-      emoji: "🖨️",
+      icon: <BookOpen className="w-6 h-6 text-white" />,
       title: "PDFs Prontos para Imprimir",
-      description: "Baixe e imprima quantas vezes quiser sem custo adicional"
+      description: "Material formatado e pronto para impressão. Basta baixar e imprimir quantas vezes precisar."
     },
     {
-      emoji: "👶",
-      title: "Para Todas as Idades",
-      description: "Material adaptado para crianças de 4 a 10 anos"
+      icon: <Calendar className="w-6 h-6 text-white" />,
+      title: "+650 Atividades Prontas",
+      description: "Colorir, jogos, quizzes, histórias e muito mais. Um acervo completo para o ano todo."
     },
     {
-      emoji: "♾️",
-      title: "Acesso Vitalício",
-      description: "Use para sempre sem mensalidade ou taxas extras"
+      icon: <Star className="w-6 h-6 text-white" />,
+      title: "Conteúdo de Qualidade",
+      description: "Atividades desenvolvidas por profissionais para garantir o melhor aprendizado bíblico."
     },
     {
-      emoji: "🎁",
-      title: "4 Bônus Exclusivos",
-      description: "No valor de R$ 110,00 totalmente grátis"
+      icon: <Printer className="w-6 h-6 text-white" />,
+      title: "Fácil de Usar",
+      description: "Não precisa de conhecimentos técnicos. Arquivos organizados e fáceis de acessar e imprimir."
     },
     {
-      emoji: "🔒",
-      title: "Garantia de 7 Dias",
-      description: "Satisfação garantida ou seu dinheiro de volta"
+      icon: <ShieldCheck className="w-6 h-6 text-white" />,
+      title: "100% Seguro e Testado",
+      description: "Material aprovado por milhares de famílias e líderes de ministério infantil em todo o Brasil."
     },
     {
-      emoji: "⚡",
-      title: "Acesso Imediato",
-      description: "Receba tudo no seu e-mail assim que o pagamento for confirmado"
+      icon: <Zap className="w-6 h-6 text-white" />,
+      title: "Acesso Digital Imediato",
+      description: "Receba o link de acesso no seu e-mail imediatamente após a confirmação do pagamento."
     }
   ];
 
   return (
-    <section className="py-20 px-4 bg-slate-50/50 border-t border-slate-100">
-      <div className="max-w-5xl mx-auto">
-        <Reveal className="text-center mb-14">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 tracking-tight uppercase">
-            O Que Você Vai Receber
+    <section className="py-24 px-4 bg-gradient-to-br from-[#E6F4F1] via-white to-[#E6F4F1] relative overflow-hidden">
+      {/* Decorative side elements (simulating the image cutouts) */}
+      <div className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/2 w-64 h-64 bg-emerald-100 rounded-full blur-3xl opacity-50"></div>
+      <div className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/2 w-64 h-64 bg-teal-100 rounded-full blur-3xl opacity-50"></div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        <Reveal className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight uppercase">
+            O QUE VOCÊ VAI RECEBER
           </h2>
         </Reveal>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {items.map((item, index) => (
-            <Reveal key={index} delay={index * 100} variant="slide-up">
-              <div className="group bg-white p-5 rounded-2xl border-2 border-green-500 shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-5">
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200/60 shrink-0 flex items-center justify-center text-2xl group-hover:scale-110 group-hover:from-green-50 group-hover:to-emerald-100/50 group-hover:border-green-200 transition-all duration-300 shadow-sm">
-                  {item.emoji}
+            <Reveal key={index} delay={index * 100} variant="up">
+              <div className="bg-white/80 backdrop-blur-sm p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-300 flex items-start gap-5 border border-white/50 h-full">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-500 shrink-0 flex items-center justify-center shadow-lg shadow-emerald-200">
+                  {item.icon}
                 </div>
                 <div>
-                  <h3 className="text-base font-semibold text-slate-900 mb-1">{item.title}</h3>
-                  <p className="text-sm text-slate-500 leading-relaxed">{item.description}</p>
+                  <h3 className="text-lg font-bold text-slate-900 mb-2 leading-tight">{item.title}</h3>
+                  <p className="text-sm text-slate-600 leading-relaxed">{item.description}</p>
                 </div>
               </div>
             </Reveal>
@@ -769,7 +840,7 @@ const Pricing = () => {
                   Plano Premium
                 </div>
                 <img 
-                  src="https://i.postimg.cc/VNR1vRTt/Chat-GPT-Image-15-de-mar-de-2026-18-34-28-(1).png" 
+                  src="https://i.postimg.cc/853XZkFp/Gemini-Generated-Image-tadiqrtadiqrtadi-(1).png" 
                   alt="Kit Completo Sementinhas de Fé" 
                   className="w-full max-w-[320px] object-contain mb-4 hover:scale-105 transition-transform duration-500 drop-shadow-xl"
                   referrerPolicy="no-referrer"
