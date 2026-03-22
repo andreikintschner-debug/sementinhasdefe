@@ -164,7 +164,7 @@ const Hero = () => (
       
       <Reveal delay={200}>
         <h1 className="text-3xl md:text-5xl lg:text-[54px] font-bold text-slate-900 leading-[1.15] max-w-4xl mx-auto">
-          +650 Atividades Bíblicas Prontas para Ministério Infantil e Ensino em Casa
+          650+ Atividades Bíblicas Prontas para Encantar e Ensinar Crianças
         </h1>
       </Reveal>
 
@@ -176,7 +176,7 @@ const Hero = () => (
 
       <Reveal variant="scale" delay={400} className="w-full max-w-4xl relative mt-8">
         <div className="relative flex justify-center">
-          <WistiaPlayer mediaId="1etogojhil" />
+          <WistiaPlayer mediaId="5fosiqko0m" />
           {/* Badge */}
           <div className="absolute -top-4 -right-4 md:top-[-5%] md:right-[-5%] bg-[#FFDE59] text-slate-900 px-3 py-1.5 rounded-lg shadow-lg flex items-center gap-2 z-20 border-2 border-white transform rotate-3">
             <div className="bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded flex items-center justify-center">
@@ -212,7 +212,7 @@ const Hero = () => (
               role="button"
               tabIndex={1}
               aria-label="Quero Garantir o meu acesso agora"
-              className="px-8 md:px-12 py-4 md:py-5 bg-gradient-to-b from-[#6BBA75] to-[#3A8B50] hover:from-[#75C680] hover:to-[#429D5B] text-white rounded-full text-lg md:text-xl font-bold border border-white/30 transition-all text-center uppercase tracking-wide w-full md:w-auto animate-pulse-button"
+              className="px-8 md:px-12 py-4 md:py-5 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white rounded-full text-lg md:text-xl font-bold border border-white/30 transition-all text-center uppercase tracking-wide w-full md:w-auto animate-pulse-button shadow-xl shadow-green-100"
             >
               Quero Garantir o meu acesso agora
             </a>
@@ -325,6 +325,20 @@ const WhatYouGet = () => {
             </Reveal>
           ))}
         </div>
+        
+        <Reveal delay={300} variant="up" className="mt-16 flex justify-center">
+          <a 
+            href="#plans" 
+            onClick={handleCTAClick}
+            data-track="cta-click"
+            data-location="what-you-get"
+            role="button"
+            aria-label="GARANTIR MATERIAL AGORA"
+            className="inline-flex items-center justify-center px-8 md:px-12 py-5 rounded-full text-xl font-black bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white transition-all transform active:scale-95 uppercase tracking-widest shadow-xl shadow-green-100 animate-pulse-soft text-center"
+          >
+            GARANTIR MATERIAL AGORA
+          </a>
+        </Reveal>
       </div>
     </section>
   );
@@ -349,55 +363,6 @@ const Stats = () => (
     </div>
   </section>
 );
-
-const Features = () => {
-  const sampleImages = [
-    "https://i.postimg.cc/Z5vK6XPR/Davi-e-Golias-coloring-page-625eb147-J-86UVbc.webp",
-    "https://i.postimg.cc/rwRF57Gs/Sementinhas-de-Cristo-A-arca-de-Noe-36-page-0001-1763755786865-Co-NFXEOy.webp",
-    "https://i.postimg.cc/Hk8sbF0W/BONUS-6-Atividades-Extras-4-page-0001-1763755797182-CJpvk5Ur.webp"
-  ];
-
-  return (
-    <section id="features" data-section="features" className="py-24 px-4 bg-white">
-      <div className="max-w-6xl mx-auto">
-        <Reveal className="text-center mb-12">
-          <h3 className="text-2xl font-bold text-green-800">Uma amostra do que você encontrará no kit:</h3>
-        </Reveal>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          {sampleImages.map((img, idx) => (
-            <Reveal key={idx} delay={idx * 200} variant="scale">
-              <div className="relative group overflow-hidden rounded-2xl shadow-xl border border-slate-200 bg-white">
-                <img 
-                  src={img} 
-                  alt={`Amostra de Atividade ${idx + 1}`} 
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-auto transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors pointer-events-none"></div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-
-        <Reveal variant="scale" className="flex justify-center">
-          <a 
-            href="#plans" 
-            onClick={handleCTAClick}
-            data-track="cta-click"
-            data-location="features"
-            role="button"
-            aria-label="Garantir esse material agora"
-            className="px-10 py-5 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white rounded-2xl text-xl font-bold shadow-xl transition-all transform hover:-translate-y-1 text-center flex items-center gap-2 uppercase"
-          >
-            Garantir esse material agora <ArrowRight className="w-6 h-6" />
-          </a>
-        </Reveal>
-      </div>
-    </section>
-  );
-};
 
 const IdealFor = () => (
   <section id="ideal-for" data-section="ideal-for" className="py-24 px-4 bg-slate-50 overflow-hidden">
@@ -593,19 +558,19 @@ const Bonuses = () => {
           </div>
         </Reveal>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6 lg:gap-8 mb-16 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-16 max-w-6xl mx-auto">
           {bonuses.map((bonus, idx) => (
             <Reveal key={bonus.id} delay={idx * 150} variant="up" className="h-full">
-              <div className="group relative bg-white p-6 md:p-8 rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] transition-all duration-500 flex flex-col h-full border border-slate-100">
+              <div className="group relative bg-white p-5 rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] transition-all duration-500 flex flex-col h-full border border-slate-100">
                 {/* Book Image */}
-                <div className="relative mb-6 flex justify-center">
-                  <div className="w-full max-w-[180px] aspect-[4/5] relative group-hover:scale-105 transition-transform duration-500">
+                <div className="relative mb-5 flex justify-center">
+                  <div className="w-full max-w-[140px] aspect-[4/5] relative group-hover:scale-105 transition-transform duration-500">
                     <img 
                       src={bonus.image} 
                       alt={bonus.title} 
                       loading="lazy"
                       decoding="async"
-                      className="w-full h-full object-cover rounded-xl shadow-xl"
+                      className="w-full h-full object-cover rounded-xl shadow-md"
                       referrerPolicy="no-referrer"
                     />
                     <div className="absolute inset-0 rounded-xl ring-1 ring-inset ring-black/10"></div>
@@ -613,29 +578,29 @@ const Bonuses = () => {
                 </div>
                 
                 {/* Label Row */}
-                <div className="flex justify-between items-center mb-3">
-                  <span className="text-[#1e3a8a] font-bold text-lg uppercase tracking-tight">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-[#1e3a8a] font-bold text-sm uppercase tracking-tight">
                     BÔNUS {bonus.id}
                   </span>
-                  <span className="text-green-600 font-bold text-xs uppercase tracking-wider">
+                  <span className="text-green-600 font-bold text-[10px] uppercase tracking-wider">
                     HOJE: GRÁTIS
                   </span>
                 </div>
 
                 {/* Title */}
-                <h4 className="text-xl font-bold text-slate-900 mb-2 leading-tight">
+                <h4 className="text-base font-bold text-slate-900 mb-1.5 leading-tight">
                   {bonus.title}
                 </h4>
                 
                 {/* Value */}
-                <div className="mb-4">
-                  <span className="text-red-500 font-medium text-base line-through opacity-80">
+                <div className="mb-2">
+                  <span className="text-red-500 font-medium text-sm line-through opacity-80">
                     Valor: {bonus.value}
                   </span>
                 </div>
 
                 {/* Description */}
-                <p className="text-slate-600 text-base leading-relaxed">
+                <p className="text-slate-600 text-sm leading-relaxed">
                   {bonus.description}
                 </p>
               </div>
@@ -661,137 +626,8 @@ const Bonuses = () => {
   );
 };
 
-const UpsellModal: React.FC<{ 
-  isOpen: boolean; 
-  onClose: () => void; 
-  premiumUrl: string;
-  basicUrl: string;
-}> = ({ isOpen, onClose, premiumUrl, basicUrl }) => {
-  if (!isOpen) return null;
-
-  return (
-    <div className="fixed inset-0 z-[100] overflow-y-auto bg-[#2D8659]/40 backdrop-blur-sm">
-      <div className="flex min-h-full items-center justify-center p-4">
-        <div className="bg-white rounded-3xl max-w-2xl w-full shadow-2xl relative overflow-hidden animate-in fade-in zoom-in duration-300 flex flex-col my-8">
-          
-          {/* Badge Superior */}
-          <div className="bg-[#2D8659] text-white text-center py-2 text-xs font-bold tracking-widest uppercase">
-            OPORTUNIDADE ÚNICA
-          </div>
-
-          <button 
-            onClick={onClose}
-            aria-label="Fechar modal"
-            className="absolute top-10 right-6 text-slate-400 hover:text-slate-600 transition-colors z-20"
-          >
-            <X size={20} />
-          </button>
-
-          <div className="p-6 md:p-8 space-y-6">
-            {/* Título e Subtítulo */}
-            <div className="text-center space-y-2">
-              <h3 className="text-2xl md:text-3xl font-black text-[#2D8659] leading-tight">
-                ⚠️ ESPERA! NÃO LEVE APENAS O BÁSICO
-              </h3>
-              <p className="text-[#333] text-sm md:text-base">
-                Por apenas <span className="font-bold">+R$ 10,00</span> você desbloqueia o acesso total ao <span className="font-bold text-[#2D8659]">Plano Premium</span>.
-              </p>
-            </div>
-
-            {/* Cards Lado a Lado */}
-            <div className="grid md:grid-cols-2 gap-4">
-              {/* Card Básico */}
-              <div className="border border-[#E0E0E0] rounded-2xl p-5 flex flex-col bg-white">
-                <span className="text-[10px] font-bold text-[#2D8659] uppercase tracking-wider mb-1">PLANO BÁSICO</span>
-                <div className="text-2xl font-black text-[#2D8659] mb-4">R$ 9,90</div>
-                <ul className="space-y-2 flex-grow">
-                  <li className="flex items-start gap-2 text-xs text-slate-600">
-                    <Check size={14} className="text-[#2D8659] shrink-0 mt-0.5" />
-                    <span>Atividades Bíblicas prontas para imprimir</span>
-                  </li>
-                  <li className="flex items-start gap-2 text-xs text-slate-600">
-                    <Check size={14} className="text-[#2D8659] shrink-0 mt-0.5" />
-                    <span>Acesso Vitalício</span>
-                  </li>
-                </ul>
-              </div>
-
-              {/* Card Premium */}
-              <div className="border-4 border-[#2D8659] rounded-2xl p-5 flex flex-col bg-[#E8F5E9] relative">
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#2D8659] text-white text-[9px] font-bold px-3 py-1 rounded-full uppercase whitespace-nowrap">
-                  MAIS VANTAJOSO
-                </div>
-                <span className="text-[10px] font-bold text-[#2D8659] uppercase tracking-wider mb-1 mt-1">PLANO PREMIUM</span>
-                <div className="text-2xl font-black text-[#2D8659] mb-4">R$ 19,90</div>
-                <ul className="space-y-2 flex-grow">
-                  {[
-                    "Tudo do Plano Básico",
-                    "+650 Atividades Bíblicas prontas",
-                    "+350 Atividades Extras anuais",
-                    "Histórias da Criação a Jesus",
-                    "TODOS os 4 Bônus inclusos",
-                    "Suporte prioritário via email"
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-2 text-xs text-slate-700 font-medium">
-                      <div className="w-3.5 h-3.5 rounded-full border border-[#2D8659] flex items-center justify-center shrink-0 mt-0.5">
-                        <div className="w-1.5 h-1.5 rounded-full bg-[#2D8659]"></div>
-                      </div>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            {/* Banner Economia */}
-            <div className="bg-[#4CAF50] text-white text-center py-3 px-4 rounded-xl font-bold text-sm md:text-base shadow-md">
-              🎁 VOCÊ ECONOMIZA R$ 10,00+ GANHA 21 ITEM BÔNUS
-            </div>
-
-            {/* Botões de Ação */}
-            <div className="space-y-4 text-center">
-              <a 
-                href={premiumUrl}
-                data-track="cta-click"
-                data-location="upsell-modal-premium"
-                role="button"
-                aria-label="SIM! GARANTIR O PLANO PREMIUM POR R$ 19,90"
-                className="block w-full py-4 bg-[#2D8659] hover:bg-[#3ea368] text-white rounded-xl text-lg font-black shadow-lg transition-all transform hover:scale-[1.02] active:scale-95 uppercase tracking-wider text-center"
-              >
-                ✅ SIM! GARANTIR O PLANO PREMIUM POR R$ 19,90
-              </a>
-              
-              <a 
-                href={basicUrl}
-                data-track="cta-click"
-                data-location="upsell-modal-basic"
-                role="button"
-                aria-label="Não, quero continuar apenas com o Plano Básico"
-                className="block text-[#666] hover:text-[#2D8659] font-bold text-xs underline underline-offset-4 transition-colors uppercase"
-              >
-                Não, quero continuar apenas com o Plano Básico (R$ 9,90)
-              </a>
-            </div>
-
-            {/* Rodapé */}
-            <div className="text-center text-[10px] text-slate-400 font-medium pt-2 border-t border-slate-100">
-              🔒 CHECKOUT 100% SEGURO • GARANTIA DE 7 DIAS
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 const Pricing = () => {
-  const [showUpsell, setShowUpsell] = useState(false);
-
-  const handleBasicClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setShowUpsell(true);
-  };
-
   const getCheckoutUrl = (baseUrl: string) => {
     try {
       const url = new URL(baseUrl);
@@ -807,134 +643,71 @@ const Pricing = () => {
 
   return (
     <section id="plans" data-section="pricing" className="py-24 px-4 bg-white scroll-mt-20 overflow-hidden text-slate-800">
-      <UpsellModal 
-        isOpen={showUpsell} 
-        onClose={() => setShowUpsell(false)} 
-        premiumUrl={getCheckoutUrl("https://ggcheckout.com.br/checkout/v5/5edlPTtL5Kn1JlgmiIbY")}
-        basicUrl={getCheckoutUrl("https://ggcheckout.com.br/checkout/v5/ZXz3YglegUw0oQhq7W8Z")}
-      />
       <div className="max-w-6xl mx-auto">
-        <Reveal className="text-center mb-12">
-          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight uppercase">Escolha o Seu Plano</h2>
-          <p className="text-lg text-slate-600 font-medium">Invista no crescimento espiritual das crianças hoje mesmo.</p>
-        </Reveal>
-        
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
-          {/* Plan Básico */}
-          <Reveal delay={0} variant="scale" className="flex h-full">
-            <div className="relative w-full flex flex-col bg-white rounded-[2rem] p-6 md:p-8 shadow-2xl transition-all duration-300 hover:shadow-xl group border border-slate-200">
-              <div className="flex flex-col items-center mb-8">
-                <div className="bg-slate-100 text-slate-500 px-5 py-1 rounded-full font-bold text-[10px] uppercase tracking-[0.2em] mb-6">
-                  Plano Básico
-                </div>
-                <h3 className="text-3xl font-bold text-slate-900 mb-2 tracking-tight">Plano Básico</h3>
-                <p className="text-slate-500 text-sm font-medium mb-8">O essencial para começar</p>
-                
-                <div className="flex flex-col items-center text-center">
-                  <span className="text-slate-400 line-through text-base font-bold mb-1">R$ 39,90</span>
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-slate-900 text-4xl font-black tracking-tighter">R$ 9,90</span>
-                  </div>
-                  <span className="text-slate-400 text-[10px] font-bold uppercase tracking-widest mt-2">Pagamento Único</span>
-                </div>
-              </div>
-              
-              <div className="flex-grow space-y-4 mb-10">
-                <div className="flex gap-3 items-center">
-                  <div className="bg-green-100 p-0.5 rounded-full shrink-0">
-                    <Check className="w-4 h-4 text-green-600" strokeWidth={4} />
-                  </div>
-                  <span className="text-slate-700 font-bold text-lg leading-snug">Atividades Bíblicas prontas para imprimir</span>
-                </div>
-              </div>
-              
-              <div className="mt-auto">
-                <button 
-                  onClick={handleBasicClick}
-                  data-track="cta-click"
-                  data-location="pricing-basic"
-                  aria-label="Garantir Plano Básico"
-                  className="block w-full py-4 rounded-xl text-base font-black bg-gradient-to-r from-slate-900 to-slate-800 hover:from-black hover:to-slate-900 text-white transition-all transform active:scale-95 uppercase tracking-wider shadow-xl text-center"
-                >
-                  Garantir Plano Básico
-                </button>
-                <div className="mt-6 flex justify-center items-center gap-2 text-slate-400 font-bold text-[10px] uppercase tracking-widest">
-                  <Lock size={12} /> Compra 100% Segura
-                </div>
-              </div>
-            </div>
-          </Reveal>
-
+        <div className="max-w-2xl mx-auto items-stretch">
           {/* Plan Premium */}
-          <Reveal delay={300} variant="scale" className="flex h-full">
-            <div id="premium-plan" className="relative w-full flex flex-col bg-white rounded-[2rem] p-6 md:p-8 shadow-2xl transition-all duration-300 border-4 border-green-500 group overflow-hidden scroll-mt-24">
-              {/* Mais Popular Ribbon */}
-              <div className="absolute top-0 right-0 overflow-hidden w-28 h-28 pointer-events-none">
-                <div className="absolute top-[22px] right-[-28px] rotate-45 bg-yellow-400 text-green-900 text-[9px] font-black px-10 py-1 uppercase tracking-tighter shadow-lg w-[150px] text-center">
-                  Mais Popular
+          <Reveal delay={0} variant="scale" className="flex h-full">
+            <div id="premium-plan" className="relative w-full flex flex-col bg-[#f8fcfd] rounded-[2rem] border-2 border-green-500 p-6 md:p-10 shadow-xl transition-all duration-300 group overflow-hidden scroll-mt-24">
+              <div className="relative z-10 flex flex-col h-full items-center">
+                {/* Image */}
+                <div className="w-full flex justify-center relative mb-8">
+                  <img 
+                    src="https://i.postimg.cc/853XZkFp/Gemini-Generated-Image-tadiqrtadiqrtadi-(1).png" 
+                    alt="Kit Completo Sementinhas de Fé" 
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full max-w-[320px] object-contain hover:scale-105 transition-transform duration-500 drop-shadow-xl relative z-10"
+                    referrerPolicy="no-referrer"
+                  />
                 </div>
-              </div>
 
-              <div className="flex flex-col items-center mb-8">
-                <div className="bg-green-600 text-white px-5 py-1 rounded-full font-bold text-[10px] uppercase tracking-[0.2em] mb-4 shadow-sm">
-                  Plano Premium
+                {/* Pricing Info */}
+                <div className="w-full flex flex-col items-center text-center mb-8">
+                  <div className="text-red-600 font-bold text-center uppercase tracking-wide mb-1 text-sm md:text-base">
+                    <span className="line-through mr-1">VALOR: R$ 197,00</span> HOJE POR APENAS
+                  </div>
+                  <div className="text-green-600 text-7xl md:text-8xl font-black text-center tracking-tighter">
+                    R$ 27,90
+                  </div>
                 </div>
-                <img 
-                  src="https://i.postimg.cc/853XZkFp/Gemini-Generated-Image-tadiqrtadiqrtadi-(1).png" 
-                  alt="Kit Completo Sementinhas de Fé" 
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full max-w-[320px] object-contain mb-4 hover:scale-105 transition-transform duration-500 drop-shadow-xl"
-                  referrerPolicy="no-referrer"
-                />
-                <h3 className="text-3xl font-bold text-slate-900 mb-2 tracking-tight">Plano Premium</h3>
-                <p className="text-slate-500 text-sm font-medium mb-8 text-center">Experiência máxima Sementinhas de Fé</p>
                 
-                <div className="flex flex-col items-center text-center relative">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-slate-400 line-through text-base font-bold">R$ 197,90</span>
-                    <span className="bg-red-100 text-red-600 text-[10px] font-black px-2 py-0.5 rounded uppercase">-90% OFF</span>
-                  </div>
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-green-600 text-5xl font-black tracking-tighter">R$ 27,90</span>
-                  </div>
-                  <span className="text-slate-400 text-[10px] font-bold uppercase tracking-widest mt-2">Pagamento Único</span>
-                </div>
-              </div>
-              
-              <div className="flex-grow space-y-3 mb-10">
-                {[
-                  "Tudo do plano básico",
-                  "+650 Atividades Bíblicas prontas",
-                  "+350 Atividades Extras anuais",
-                  "Histórias da Criação a Jesus",
-                  "TODOS os 4 Bônus inclusos",
-                  "Suporte prioritário via email"
-                ].map((item, idx) => (
-                  <div key={idx} className="flex gap-3 items-center">
-                    <div className="bg-green-500 p-0.5 rounded-full shrink-0">
-                      <Check className="w-3 h-3 text-white" strokeWidth={4} />
+                {/* Features List */}
+                <div className="flex flex-col items-start mx-auto w-fit space-y-3 mb-10">
+                  {[
+                    "+650 Atividades Bíblicas prontas",
+                    "+350 Atividades Extras anuais",
+                    "Histórias da Criação a Jesus",
+                    "TODOS os 4 Bônus inclusos",
+                    "Suporte por e-mail e whatsapp",
+                    "Garantia de 7 Dias",
+                    "Acesso Imediato"
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex gap-3 items-center">
+                      <div className="bg-[#009900] rounded p-0.5 shrink-0 flex items-center justify-center">
+                        <Check className="w-4 h-4 text-white" strokeWidth={4} />
+                      </div>
+                      <span className="text-slate-800 font-medium text-lg">{item}</span>
                     </div>
-                    <span className="text-slate-800 font-bold text-lg tracking-tight leading-tight">{item}</span>
+                  ))}
+                </div>
+                
+                {/* CTA Button */}
+                <div className="mt-auto w-full max-w-md mx-auto">
+                  <a 
+                    href={getCheckoutUrl("https://ggcheckout.com.br/checkout/v5/7wOe47g8XVzL1HnjKopl")}
+                    data-track="cta-click"
+                    data-location="pricing-premium"
+                    role="button"
+                    aria-label="COMPRAR AGORA"
+                    className="block w-full py-4 rounded-xl text-xl font-black bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white transition-all transform active:scale-95 uppercase tracking-widest shadow-xl shadow-green-100 animate-pulse-soft text-center"
+                  >
+                    COMPRAR AGORA
+                  </a>
+                  
+                  {/* Footer Text */}
+                  <div className="mt-4 text-center text-green-600/70 font-medium text-base">
+                    * disponível apenas na versão digital
                   </div>
-                ))}
-              </div>
-              
-              <div className="mt-auto">
-                <a 
-                  href={getCheckoutUrl("https://ggcheckout.com.br/checkout/v5/7wOe47g8XVzL1HnjKopl")}
-                  data-track="cta-click"
-                  data-location="pricing-premium"
-                  role="button"
-                  aria-label="Garantir Plano Premium"
-                  className="block w-full py-4 rounded-xl text-base font-black bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white transition-all transform active:scale-95 uppercase tracking-widest shadow-xl shadow-green-100 animate-pulse-soft text-center"
-                >
-                  Garantir Plano Premium
-                </a>
-                <div className="mt-6 flex justify-center items-center gap-3 text-slate-400 font-bold text-[9px] uppercase tracking-widest">
-                  <div className="flex items-center gap-1"><Lock size={10} className="text-green-500" /> Compra 100% Segura</div>
-                  <div className="w-1 h-1 bg-slate-200 rounded-full"></div>
-                  <div>Garantia de 7 Dias</div>
                 </div>
               </div>
             </div>
@@ -1114,7 +887,6 @@ const App: React.FC = () => {
         <Hero />
         <Stats />
         <WhatYouGet />
-        <Features />
         <Testimonials />
         <Benefits />
         <IdealFor />
