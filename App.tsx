@@ -124,17 +124,19 @@ const WistiaPlayer = ({ mediaId }: { mediaId: string }) => {
     const script1 = document.createElement('script');
     script1.src = 'https://fast.wistia.com/player.js';
     script1.async = true;
+    script1.setAttribute('fetchpriority', 'high');
     document.body.appendChild(script1);
 
     const script2 = document.createElement('script');
     script2.src = `https://fast.wistia.com/embed/${mediaId}.js`;
     script2.async = true;
     script2.type = 'module';
+    script2.setAttribute('fetchpriority', 'high');
     document.body.appendChild(script2);
   }, [mediaId]);
 
   return (
-    <div className="w-full relative rounded-2xl overflow-hidden shadow-2xl z-10 border-4 border-white/20">
+    <div className="w-full relative rounded-2xl overflow-hidden shadow-2xl z-10 border-4 border-slate-200">
       <style dangerouslySetInnerHTML={{
         __html: `
           wistia-player[media-id='${mediaId}']:not(:defined) { 
@@ -151,23 +153,23 @@ const WistiaPlayer = ({ mediaId }: { mediaId: string }) => {
 };
 
 const Hero = () => (
-  <header className="relative bg-gradient-to-b from-[#429D5B] via-[#90C895] to-white pt-16 pb-20 px-4 overflow-hidden">
+  <header id="hero" data-section="hero" className="relative bg-white pt-16 pb-20 px-4 overflow-hidden">
     {/* Decorative background elements to simulate the illustration */}
     <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-      <div className="absolute -top-20 -left-20 w-96 h-96 bg-white/20 rounded-full blur-3xl"></div>
-      <div className="absolute top-20 right-10 w-80 h-80 bg-yellow-200/20 rounded-full blur-3xl"></div>
+      <div className="absolute -top-20 -left-20 w-96 h-96 bg-green-100/50 rounded-full blur-3xl"></div>
+      <div className="absolute top-20 right-10 w-80 h-80 bg-yellow-100/50 rounded-full blur-3xl"></div>
     </div>
     
     <div className="max-w-6xl mx-auto flex flex-col items-center text-center relative z-10 space-y-8">
       
       <Reveal delay={200}>
-        <h1 className="text-3xl md:text-5xl lg:text-[54px] font-bold text-white leading-[1.15] drop-shadow-md max-w-4xl mx-auto">
+        <h1 className="text-3xl md:text-5xl lg:text-[54px] font-bold text-slate-900 leading-[1.15] max-w-4xl mx-auto">
           +650 Atividades Bíblicas Prontas para Ministério Infantil e Ensino em Casa
         </h1>
       </Reveal>
 
       <Reveal delay={300}>
-        <p className="text-lg md:text-2xl text-white/95 max-w-3xl font-medium drop-shadow-sm">
+        <p className="text-lg md:text-2xl text-slate-600 max-w-3xl font-medium">
           Colorir, jogos, quizzes, histórias e muito mais. Imprima quantas vezes quiser.
         </p>
       </Reveal>
@@ -205,6 +207,11 @@ const Hero = () => (
             <a 
               href="#plans" 
               onClick={handleCTAClick}
+              data-track="cta-click"
+              data-location="hero"
+              role="button"
+              tabIndex={1}
+              aria-label="Quero Garantir o meu acesso agora"
               className="px-8 md:px-12 py-4 md:py-5 bg-gradient-to-b from-[#6BBA75] to-[#3A8B50] hover:from-[#75C680] hover:to-[#429D5B] text-white rounded-full text-lg md:text-xl font-bold border border-white/30 transition-all text-center uppercase tracking-wide w-full md:w-auto animate-pulse-button"
             >
               Quero Garantir o meu acesso agora
@@ -255,38 +262,43 @@ const WhatYouGet = () => {
   const items = [
     {
       icon: <BookOpen className="w-6 h-6 text-white" />,
-      title: "PDFs Prontos para Imprimir",
-      description: "Material formatado e pronto para impressão. Basta baixar e imprimir quantas vezes precisar."
+      title: "+650 Atividades Bíblicas",
+      description: "Colorir, jogos, quizzes, caça-palavras e histórias completas da Bíblia"
     },
     {
-      icon: <Calendar className="w-6 h-6 text-white" />,
-      title: "+650 Atividades Prontas",
-      description: "Colorir, jogos, quizzes, histórias e muito mais. Um acervo completo para o ano todo."
-    },
-    {
-      icon: <Star className="w-6 h-6 text-white" />,
-      title: "Conteúdo de Qualidade",
-      description: "Atividades desenvolvidas por profissionais para garantir o melhor aprendizado bíblico."
+      icon: <Book className="w-6 h-6 text-white" />,
+      title: "Histórias Completas",
+      description: "Da Criação até os ensinamentos de Jesus, todas as histórias importantes"
     },
     {
       icon: <Printer className="w-6 h-6 text-white" />,
-      title: "Fácil de Usar",
-      description: "Não precisa de conhecimentos técnicos. Arquivos organizados e fáceis de acessar e imprimir."
+      title: "PDFs Prontos para Imprimir",
+      description: "Baixe e imprima quantas vezes quiser sem custo adicional"
+    },
+    {
+      icon: <Users className="w-6 h-6 text-white" />,
+      title: "Para Todas as Idades",
+      description: "Material adaptado para crianças de 4 a 10 anos"
+    },
+    {
+      icon: <Infinity className="w-6 h-6 text-white" />,
+      title: "Acesso Vitalício",
+      description: "Use para sempre sem mensalidade ou taxas extras"
+    },
+    {
+      icon: <Gift className="w-6 h-6 text-white" />,
+      title: "4 Bônus Exclusivos",
+      description: "No valor de R$ 110,00 totalmente grátis"
     },
     {
       icon: <ShieldCheck className="w-6 h-6 text-white" />,
-      title: "100% Seguro e Testado",
-      description: "Material aprovado por milhares de famílias e líderes de ministério infantil em todo o Brasil."
-    },
-    {
-      icon: <Zap className="w-6 h-6 text-white" />,
-      title: "Acesso Digital Imediato",
-      description: "Receba o link de acesso no seu e-mail imediatamente após a confirmação do pagamento."
+      title: "Garantia de 7 Dias",
+      description: "Satisfação garantida ou seu dinheiro de volta"
     }
   ];
 
   return (
-    <section className="py-24 px-4 bg-gradient-to-br from-[#E6F4F1] via-white to-[#E6F4F1] relative overflow-hidden">
+    <section id="what-you-get" data-section="what-you-get" className="py-24 px-4 bg-gradient-to-br from-[#E6F4F1] via-white to-[#E6F4F1] relative overflow-hidden">
       {/* Decorative side elements (simulating the image cutouts) */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/2 w-64 h-64 bg-emerald-100 rounded-full blur-3xl opacity-50"></div>
       <div className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/2 w-64 h-64 bg-teal-100 rounded-full blur-3xl opacity-50"></div>
@@ -319,7 +331,7 @@ const WhatYouGet = () => {
 };
 
 const Stats = () => (
-  <section className="bg-white py-12 border-y border-slate-100 overflow-hidden">
+  <section id="stats" data-section="stats" className="bg-white py-12 border-y border-slate-100 overflow-hidden">
     <div className="max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8">
       {[
         { val: "12.000+", label: "Famílias Satisfeitas" },
@@ -346,7 +358,7 @@ const Features = () => {
   ];
 
   return (
-    <section className="py-24 px-4 bg-white">
+    <section id="features" data-section="features" className="py-24 px-4 bg-white">
       <div className="max-w-6xl mx-auto">
         <Reveal className="text-center mb-12">
           <h3 className="text-2xl font-bold text-green-800">Uma amostra do que você encontrará no kit:</h3>
@@ -359,6 +371,8 @@ const Features = () => {
                 <img 
                   src={img} 
                   alt={`Amostra de Atividade ${idx + 1}`} 
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-auto transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors pointer-events-none"></div>
@@ -371,6 +385,10 @@ const Features = () => {
           <a 
             href="#plans" 
             onClick={handleCTAClick}
+            data-track="cta-click"
+            data-location="features"
+            role="button"
+            aria-label="Garantir esse material agora"
             className="px-10 py-5 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white rounded-2xl text-xl font-bold shadow-xl transition-all transform hover:-translate-y-1 text-center flex items-center gap-2 uppercase"
           >
             Garantir esse material agora <ArrowRight className="w-6 h-6" />
@@ -382,7 +400,7 @@ const Features = () => {
 };
 
 const IdealFor = () => (
-  <section className="py-24 px-4 bg-slate-50 overflow-hidden">
+  <section id="ideal-for" data-section="ideal-for" className="py-24 px-4 bg-slate-50 overflow-hidden">
     <div className="max-w-6xl mx-auto">
       <Reveal className="text-center mb-16">
         <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Este Kit É Ideal Para Você?</h2>
@@ -437,6 +455,10 @@ const IdealFor = () => (
         <a 
           href="#plans" 
           onClick={handleCTAClick}
+          data-track="cta-click"
+          data-location="ideal-for"
+          role="button"
+          aria-label="Sim, esse kit é para mim"
           className="px-10 py-5 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white rounded-2xl text-xl font-bold shadow-xl transition-all transform hover:-translate-y-1 text-center animate-pulse-soft uppercase"
         >
           Sim, esse kit é para mim
@@ -447,7 +469,7 @@ const IdealFor = () => (
 );
 
 const Benefits = () => (
-  <section className="py-24 px-4 bg-white relative overflow-hidden">
+  <section id="benefits" data-section="benefits" className="py-24 px-4 bg-white relative overflow-hidden">
     {/* Background Glow */}
     <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
       <div className="absolute top-1/4 -left-20 w-96 h-96 bg-green-100/50 rounded-full blur-[120px]"></div>
@@ -549,7 +571,7 @@ const Bonuses = () => {
   ];
 
   return (
-    <section className="py-24 px-4 bg-[#f0f9ff]/30 relative overflow-hidden">
+    <section id="bonuses" data-section="bonuses" className="py-24 px-4 bg-[#f0f9ff]/30 relative overflow-hidden">
       {/* Abstract Background Shapes */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-40">
         <div className="absolute top-10 left-10 w-64 h-64 bg-blue-100 rounded-full blur-3xl"></div>
@@ -581,6 +603,8 @@ const Bonuses = () => {
                     <img 
                       src={bonus.image} 
                       alt={bonus.title} 
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover rounded-xl shadow-xl"
                       referrerPolicy="no-referrer"
                     />
@@ -623,6 +647,10 @@ const Bonuses = () => {
            <a 
             href="#premium-plan" 
             onClick={handleCTAClick}
+            data-track="cta-click"
+            data-location="bonuses"
+            role="button"
+            aria-label="Quero os bônus"
             className="inline-block px-12 py-5 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white rounded-2xl text-xl font-bold shadow-xl transition-all transform hover:-translate-y-1 text-center animate-pulse-soft uppercase"
            >
               Quero os bônus
@@ -653,6 +681,7 @@ const UpsellModal: React.FC<{
 
           <button 
             onClick={onClose}
+            aria-label="Fechar modal"
             className="absolute top-10 right-6 text-slate-400 hover:text-slate-600 transition-colors z-20"
           >
             <X size={20} />
@@ -723,6 +752,10 @@ const UpsellModal: React.FC<{
             <div className="space-y-4 text-center">
               <a 
                 href={premiumUrl}
+                data-track="cta-click"
+                data-location="upsell-modal-premium"
+                role="button"
+                aria-label="SIM! GARANTIR O PLANO PREMIUM POR R$ 19,90"
                 className="block w-full py-4 bg-[#2D8659] hover:bg-[#3ea368] text-white rounded-xl text-lg font-black shadow-lg transition-all transform hover:scale-[1.02] active:scale-95 uppercase tracking-wider text-center"
               >
                 ✅ SIM! GARANTIR O PLANO PREMIUM POR R$ 19,90
@@ -730,6 +763,10 @@ const UpsellModal: React.FC<{
               
               <a 
                 href={basicUrl}
+                data-track="cta-click"
+                data-location="upsell-modal-basic"
+                role="button"
+                aria-label="Não, quero continuar apenas com o Plano Básico"
                 className="block text-[#666] hover:text-[#2D8659] font-bold text-xs underline underline-offset-4 transition-colors uppercase"
               >
                 Não, quero continuar apenas com o Plano Básico (R$ 9,90)
@@ -769,7 +806,7 @@ const Pricing = () => {
   };
 
   return (
-    <section id="plans" className="py-24 px-4 bg-white scroll-mt-20 overflow-hidden text-slate-800">
+    <section id="plans" data-section="pricing" className="py-24 px-4 bg-white scroll-mt-20 overflow-hidden text-slate-800">
       <UpsellModal 
         isOpen={showUpsell} 
         onClose={() => setShowUpsell(false)} 
@@ -814,6 +851,9 @@ const Pricing = () => {
               <div className="mt-auto">
                 <button 
                   onClick={handleBasicClick}
+                  data-track="cta-click"
+                  data-location="pricing-basic"
+                  aria-label="Garantir Plano Básico"
                   className="block w-full py-4 rounded-xl text-base font-black bg-gradient-to-r from-slate-900 to-slate-800 hover:from-black hover:to-slate-900 text-white transition-all transform active:scale-95 uppercase tracking-wider shadow-xl text-center"
                 >
                   Garantir Plano Básico
@@ -842,6 +882,8 @@ const Pricing = () => {
                 <img 
                   src="https://i.postimg.cc/853XZkFp/Gemini-Generated-Image-tadiqrtadiqrtadi-(1).png" 
                   alt="Kit Completo Sementinhas de Fé" 
+                  loading="lazy"
+                  decoding="async"
                   className="w-full max-w-[320px] object-contain mb-4 hover:scale-105 transition-transform duration-500 drop-shadow-xl"
                   referrerPolicy="no-referrer"
                 />
@@ -881,6 +923,10 @@ const Pricing = () => {
               <div className="mt-auto">
                 <a 
                   href={getCheckoutUrl("https://ggcheckout.com.br/checkout/v5/7wOe47g8XVzL1HnjKopl")}
+                  data-track="cta-click"
+                  data-location="pricing-premium"
+                  role="button"
+                  aria-label="Garantir Plano Premium"
                   className="block w-full py-4 rounded-xl text-base font-black bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white transition-all transform active:scale-95 uppercase tracking-widest shadow-xl shadow-green-100 animate-pulse-soft text-center"
                 >
                   Garantir Plano Premium
@@ -911,6 +957,8 @@ const Guarantee = () => (
             <img 
               src="https://www.imagemhost.com.br/images/2025/04/17/Selo_de_Garantia_de_7_Dias_PNG_Transparente_Sem_Fundo.png" 
               alt="Selo de Garantia 7 Dias" 
+              loading="lazy"
+              decoding="async"
               className="w-40 md:w-48 h-auto drop-shadow-2xl animate-bounce-subtle"
             />
           </div>
@@ -940,6 +988,10 @@ const Guarantee = () => (
                <a 
                 href="#plans" 
                 onClick={handleCTAClick}
+                data-track="cta-click"
+                data-location="guarantee"
+                role="button"
+                aria-label="Garantir meu risco zero"
                 className="px-6 py-3 bg-gradient-to-r from-slate-900 to-slate-800 hover:from-black hover:to-slate-900 text-white rounded-xl font-bold shadow-lg transition-transform hover:scale-105 flex items-center gap-2 uppercase text-sm"
                >
                  Garantir meu risco zero <ArrowRight size={18} />
@@ -976,13 +1028,15 @@ const FAQ = () => {
               <div className="border border-slate-200 rounded-2xl overflow-hidden transition-all hover:border-green-300">
                 <button 
                   onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
+                  aria-expanded={openIndex === idx}
+                  aria-controls={`faq-answer-${idx}`}
                   className="w-full flex items-center justify-between p-6 text-left hover:bg-green-50/30 transition-colors"
                 >
                   <span className="font-bold text-lg text-slate-800">{faq.question}</span>
                   {openIndex === idx ? <ChevronUp className="text-green-500" /> : <ChevronDown className="text-slate-400" />}
                 </button>
                 {openIndex === idx && (
-                  <div className="p-6 pt-0 text-slate-600 bg-white leading-relaxed">
+                  <div id={`faq-answer-${idx}`} className="p-6 pt-0 text-slate-600 bg-white leading-relaxed">
                     {faq.answer}
                   </div>
                 )}
@@ -1003,7 +1057,7 @@ const Testimonials = () => {
   ];
 
   return (
-    <section className="py-24 px-4 bg-green-50 overflow-hidden">
+    <section id="testimonials" data-section="testimonials" className="py-24 px-4 bg-green-50 overflow-hidden">
       <div className="max-w-6xl mx-auto">
         <Reveal className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Veja Como Este Kit Mudou a Vida de +12.000 Famílias</h2>
@@ -1019,7 +1073,7 @@ const Testimonials = () => {
               className="flex justify-center"
             >
               <div className="overflow-hidden rounded-3xl shadow-lg border border-white hover:scale-105 transition-transform">
-                <img src={url} alt={`Depoimento ${idx + 1}`} className="w-full h-auto object-cover max-w-sm" />
+                <img src={url} alt={`Depoimento ${idx + 1}`} loading="lazy" decoding="async" className="w-full h-auto object-cover max-w-sm" />
               </div>
             </Reveal>
           ))}
@@ -1056,41 +1110,47 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <Hero />
-      <Stats />
-      <WhatYouGet />
-      <Features />
-      <Testimonials />
-      <Benefits />
-      <IdealFor />
-      <Bonuses />
-      <Pricing />
-      <Guarantee />
-      <FAQ />
-      
-      <section className="py-24 px-4 bg-green-50 text-center">
-        <div className="max-w-3xl mx-auto">
-          <Reveal threshold={0.3}>
-            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-8 leading-tight">
-              Não Deixe Suas Crianças Sem Este Recurso Precioso
-            </h2>
-          </Reveal>
-          <Reveal delay={200} threshold={0.3}>
-            <p className="text-xl text-slate-600 mb-12">
-              Milhares de famílias já estão usando este kit para transformar o aprendizado bíblico. Faça parte desta comunidade e veja a diferença na vida das suas crianças!
-            </p>
-          </Reveal>
-          <Reveal delay={400} variant="scale" threshold={0.3}>
-            <a 
-              href="#plans" 
-              onClick={handleCTAClick}
-              className="inline-block px-12 py-6 bg-green-600 hover:bg-green-700 text-white rounded-2xl text-2xl font-bold shadow-2xl transition-all transform hover:scale-105 active:scale-95 animate-pulse-soft uppercase"
-            >
-              Quero Garantir o meu acesso agora
-            </a>
-          </Reveal>
-        </div>
-      </section>
+      <main>
+        <Hero />
+        <Stats />
+        <WhatYouGet />
+        <Features />
+        <Testimonials />
+        <Benefits />
+        <IdealFor />
+        <Bonuses />
+        <Pricing />
+        <Guarantee />
+        <FAQ />
+        
+        <section id="bottom-cta" data-section="bottom-cta" className="py-24 px-4 bg-green-50 text-center">
+          <div className="max-w-3xl mx-auto">
+            <Reveal threshold={0.3}>
+              <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-8 leading-tight">
+                Não Deixe Suas Crianças Sem Este Recurso Precioso
+              </h2>
+            </Reveal>
+            <Reveal delay={200} threshold={0.3}>
+              <p className="text-xl text-slate-600 mb-12">
+                Milhares de famílias já estão usando este kit para transformar o aprendizado bíblico. Faça parte desta comunidade e veja a diferença na vida das suas crianças!
+              </p>
+            </Reveal>
+            <Reveal delay={400} variant="scale" threshold={0.3}>
+              <a 
+                href="#plans" 
+                onClick={handleCTAClick}
+                data-track="cta-click"
+                data-location="bottom"
+                role="button"
+                aria-label="Quero Garantir o meu acesso agora"
+                className="inline-block px-12 py-6 bg-green-600 hover:bg-green-700 text-white rounded-2xl text-2xl font-bold shadow-2xl transition-all transform hover:scale-105 active:scale-95 animate-pulse-soft uppercase"
+              >
+                Quero Garantir o meu acesso agora
+              </a>
+            </Reveal>
+          </div>
+        </section>
+      </main>
 
       <Footer />
     </div>
