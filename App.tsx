@@ -110,16 +110,16 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="bg-green-600 text-white py-2 text-center text-[13px] sm:text-base font-bold relative z-50 shadow-md flex items-center justify-center gap-1 sm:gap-2 px-1 sm:px-4 tracking-tight sm:tracking-normal">
+    <nav className="bg-pink-600 text-white py-2 text-center text-[13px] sm:text-base font-bold relative z-50 shadow-md flex items-center justify-center gap-1 sm:gap-2 px-1 sm:px-4 tracking-tight sm:tracking-normal">
       <Star className="w-3.5 h-3.5 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400 shrink-0" />
       <span className="whitespace-nowrap">
-        Desconto somente <span className="text-yellow-300">HOJE</span> nesta página {dateStr || '14/03/2026'}
+        Desconto somente HOJE nesta página {dateStr || '14/03/2026'}
       </span>
     </nav>
   );
 };
 
-const WistiaPlayer = ({ mediaId }: { mediaId: string }) => {
+const WistiaPlayer = ({ mediaId, aspect = '1.7777777777777777', paddingTop = '56.25%' }: { mediaId: string, aspect?: string, paddingTop?: string }) => {
   useEffect(() => {
     const script1 = document.createElement('script');
     script1.src = 'https://fast.wistia.com/player.js';
@@ -143,11 +143,80 @@ const WistiaPlayer = ({ mediaId }: { mediaId: string }) => {
             background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/${mediaId}/swatch'); 
             display: block; 
             filter: blur(5px); 
-            padding-top:56.25%; 
+            padding-top:${paddingTop}; 
           }
         `
       }} />
-      {React.createElement('wistia-player', { 'media-id': mediaId, aspect: '1.7777777777777777' })}
+      {React.createElement('wistia-player', { 'media-id': mediaId, aspect: aspect })}
+    </div>
+  );
+};
+
+const SocialProof = () => {
+  const [visible, setVisible] = useState(false);
+  const [currentName, setCurrentName] = useState('');
+  
+  const names = [
+    'Patricia', 'Mariana', 'Juliana', 'Carla', 'Ana Paula', 
+    'Fernanda', 'Débora', 'Camila', 'Renata', 'Tia Rosa', 
+    'Professora Lucia', 'Jessica', 'Tatiana', 'Vanessa', 'Adriana'
+  ];
+
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+    let isMounted = true;
+    let lastIndex = -1;
+
+    const showNotification = () => {
+      if (!isMounted) return;
+      
+      let nextIndex;
+      do {
+        nextIndex = Math.floor(Math.random() * names.length);
+      } while (nextIndex === lastIndex);
+      
+      lastIndex = nextIndex;
+      setCurrentName(names[nextIndex]);
+      setVisible(true);
+
+      // Hide after 5 seconds
+      setTimeout(() => {
+        if (isMounted) setVisible(false);
+      }, 5000);
+
+      // Schedule next notification (15-25 seconds)
+      const nextDelay = Math.floor(Math.random() * (25000 - 15000 + 1) + 15000);
+      timeoutId = setTimeout(showNotification, nextDelay);
+    };
+
+    // Initial delay of 5 seconds
+    timeoutId = setTimeout(showNotification, 5000);
+
+    return () => {
+      isMounted = false;
+      clearTimeout(timeoutId);
+    };
+  }, []);
+
+  return (
+    <div 
+      className={`fixed bottom-4 left-4 z-50 transition-all duration-500 transform ${
+        visible ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'
+      }`}
+    >
+      <div className="bg-pink-600 rounded-xl shadow-lg p-4 flex items-center gap-4 border border-pink-500/50 max-w-[300px]">
+        <div className="bg-white rounded-full p-1.5 shrink-0">
+          <CheckCircle2 className="w-5 h-5 text-pink-600" />
+        </div>
+        <div className="flex flex-col">
+          <span className="text-white font-bold text-sm leading-tight">
+            {currentName} comprou agora...
+          </span>
+          <span className="text-pink-100 text-xs mt-0.5">
+            Sementinhas de Fé
+          </span>
+        </div>
+      </div>
     </div>
   );
 };
@@ -156,7 +225,7 @@ const Hero = () => (
   <header id="hero" data-section="hero" className="relative bg-white pt-16 pb-20 px-4 overflow-hidden">
     {/* Decorative background elements to simulate the illustration */}
     <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-      <div className="absolute -top-20 -left-20 w-96 h-96 bg-green-100/50 rounded-full blur-3xl"></div>
+      <div className="absolute -top-20 -left-20 w-96 h-96 bg-pink-100/50 rounded-full blur-3xl"></div>
       <div className="absolute top-20 right-10 w-80 h-80 bg-yellow-100/50 rounded-full blur-3xl"></div>
     </div>
     
@@ -176,7 +245,9 @@ const Hero = () => (
 
       <Reveal variant="scale" delay={400} className="w-full max-w-4xl relative mt-8">
         <div className="relative flex justify-center">
-          <WistiaPlayer mediaId="5fosiqko0m" />
+          <div className="w-full max-w-sm mx-auto">
+            <WistiaPlayer mediaId="mgs5039qck" aspect="0.5625" paddingTop="177.78%" />
+          </div>
           {/* Badge */}
           <div className="absolute -top-4 -right-4 md:top-[-5%] md:right-[-5%] bg-[#FFDE59] text-slate-900 px-3 py-1.5 rounded-lg shadow-lg flex items-center gap-2 z-20 border-2 border-white transform rotate-3">
             <div className="bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded flex items-center justify-center">
@@ -195,7 +266,7 @@ const Hero = () => (
           <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12">
             
             {/* Left Badge */}
-            <div className="hidden lg:flex items-center gap-3 text-green-900">
+            <div className="hidden lg:flex items-center gap-3 text-pink-900">
               <ShieldCheck className="w-10 h-10 opacity-90" strokeWidth={1.5} />
               <div className="flex flex-col text-left leading-tight">
                 <span className="text-sm opacity-90">Compra</span>
@@ -212,31 +283,31 @@ const Hero = () => (
               role="button"
               tabIndex={1}
               aria-label="Quero Garantir o meu acesso agora"
-              className="px-8 md:px-12 py-4 md:py-5 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white rounded-full text-lg md:text-xl font-bold border border-white/30 transition-all text-center uppercase tracking-wide w-full md:w-auto animate-pulse-button shadow-xl shadow-green-100"
+              className="px-8 md:px-12 py-4 md:py-5 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-700 hover:to-pink-600 text-white rounded-full text-lg md:text-xl font-bold border border-white/30 transition-all text-center uppercase tracking-wide w-full md:w-auto animate-pulse-button shadow-xl shadow-pink-100"
             >
               Quero Garantir o meu acesso agora
             </a>
 
             {/* Right Badges */}
             <div className="hidden lg:flex items-center gap-8">
-              <div className="flex items-center gap-3 text-green-900">
+              <div className="flex items-center gap-3 text-pink-900">
                 <Hourglass className="w-10 h-10 opacity-90" strokeWidth={1.5} />
                 <div className="flex flex-col text-left leading-tight">
                   <span className="text-sm opacity-90">Acesso</span>
                   <span className="text-base font-bold">Imediato</span>
                 </div>
               </div>
-              <div className="flex items-center gap-3 text-green-900">
+              <div className="flex items-center gap-3 text-pink-900">
                 <CheckCircle2 className="w-10 h-10 opacity-90" strokeWidth={1.5} />
                 <div className="flex flex-col text-left leading-tight">
                   <span className="text-sm opacity-90">Garantia</span>
-                  <span className="text-base font-bold">de 7 Dias</span>
+                  <span className="text-base font-bold">de 30 Dias</span>
                 </div>
               </div>
             </div>
 
             {/* Mobile Badges */}
-            <div className="flex lg:hidden flex-wrap justify-center gap-6 text-green-900 mt-4">
+            <div className="flex lg:hidden flex-wrap justify-center gap-6 text-pink-900 mt-4">
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-6 h-6" />
                 <span className="text-sm font-bold">100% Segura</span>
@@ -247,7 +318,7 @@ const Hero = () => (
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-6 h-6" />
-                <span className="text-sm font-bold">Garantia 7 Dias</span>
+                <span className="text-sm font-bold">Garantia 30 Dias</span>
               </div>
             </div>
 
@@ -292,7 +363,7 @@ const WhatYouGet = () => {
     },
     {
       icon: <ShieldCheck className="w-6 h-6 text-white" />,
-      title: "Garantia de 7 Dias",
+      title: "Garantia de 30 Dias",
       description: "Satisfação garantida ou seu dinheiro de volta"
     }
   ];
@@ -300,8 +371,8 @@ const WhatYouGet = () => {
   return (
     <section id="what-you-get" data-section="what-you-get" className="py-24 px-4 bg-gradient-to-br from-[#E6F4F1] via-white to-[#E6F4F1] relative overflow-hidden">
       {/* Decorative side elements (simulating the image cutouts) */}
-      <div className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/2 w-64 h-64 bg-emerald-100 rounded-full blur-3xl opacity-50"></div>
-      <div className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/2 w-64 h-64 bg-teal-100 rounded-full blur-3xl opacity-50"></div>
+      <div className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/2 w-64 h-64 bg-rose-100 rounded-full blur-3xl opacity-50"></div>
+      <div className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/2 w-64 h-64 bg-pink-100 rounded-full blur-3xl opacity-50"></div>
 
       <div className="max-w-7xl mx-auto relative z-10">
         <Reveal className="text-center mb-16">
@@ -314,7 +385,7 @@ const WhatYouGet = () => {
           {items.map((item, index) => (
             <Reveal key={index} delay={index * 100} variant="up">
               <div className="bg-white/80 backdrop-blur-sm p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-300 flex items-start gap-5 border border-white/50 h-full">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-500 shrink-0 flex items-center justify-center shadow-lg shadow-emerald-200">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-rose-400 to-pink-500 shrink-0 flex items-center justify-center shadow-lg shadow-rose-200">
                   {item.icon}
                 </div>
                 <div>
@@ -334,7 +405,7 @@ const WhatYouGet = () => {
             data-location="what-you-get"
             role="button"
             aria-label="GARANTIR MATERIAL AGORA"
-            className="inline-flex items-center justify-center px-8 md:px-12 py-5 rounded-full text-xl font-black bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white transition-all transform active:scale-95 uppercase tracking-widest shadow-xl shadow-green-100 animate-pulse-soft text-center"
+            className="inline-flex items-center justify-center px-8 md:px-12 py-5 rounded-full text-xl font-black bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-700 hover:to-pink-600 text-white transition-all transform active:scale-95 uppercase tracking-widest shadow-xl shadow-pink-100 animate-pulse-soft text-center"
           >
             GARANTIR MATERIAL AGORA
           </a>
@@ -354,7 +425,7 @@ const Stats = () => (
         { val: "100%", label: "Digital e Imediato" }
       ].map((stat, i) => (
         <Reveal key={i} delay={i * 150} variant="scale" className="text-center">
-          <p className="text-3xl md:text-4xl font-bold text-green-600">{stat.val}</p>
+          <p className="text-3xl md:text-4xl font-bold text-pink-600">{stat.val}</p>
           <p className="text-slate-600 font-medium text-sm flex items-center justify-center gap-1">
             {stat.label} {stat.star && <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />}
           </p>
@@ -424,7 +495,7 @@ const IdealFor = () => (
           data-location="ideal-for"
           role="button"
           aria-label="Sim, esse kit é para mim"
-          className="px-10 py-5 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white rounded-2xl text-xl font-bold shadow-xl transition-all transform hover:-translate-y-1 text-center animate-pulse-soft uppercase"
+          className="px-10 py-5 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-700 hover:to-pink-600 text-white rounded-2xl text-xl font-bold shadow-xl transition-all transform hover:-translate-y-1 text-center animate-pulse-soft uppercase"
         >
           Sim, esse kit é para mim
         </a>
@@ -437,14 +508,14 @@ const Benefits = () => (
   <section id="benefits" data-section="benefits" className="py-24 px-4 bg-white relative overflow-hidden">
     {/* Background Glow */}
     <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-      <div className="absolute top-1/4 -left-20 w-96 h-96 bg-green-100/50 rounded-full blur-[120px]"></div>
-      <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-green-50/50 rounded-full blur-[120px]"></div>
+      <div className="absolute top-1/4 -left-20 w-96 h-96 bg-pink-100/50 rounded-full blur-[120px]"></div>
+      <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-pink-50/50 rounded-full blur-[120px]"></div>
     </div>
 
     <div className="max-w-6xl mx-auto relative z-10">
       <Reveal className="text-center mb-20 space-y-4">
         <h2 className="text-3xl md:text-5xl font-bold text-slate-900 tracking-tight">Benefícios Que Transformam</h2>
-        <div className="w-24 h-1.5 bg-green-500 mx-auto rounded-full shadow-[0_0_15px_rgba(34,197,94,0.5)]"></div>
+        <div className="w-24 h-1.5 bg-pink-500 mx-auto rounded-full shadow-[0_0_15px_rgba(236,72,153,0.5)]"></div>
         <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto">Muito mais do que atividades, uma ferramenta completa para o ensino bíblico.</p>
       </Reveal>
       
@@ -482,16 +553,16 @@ const Benefits = () => (
           }
         ].map((benefit, idx) => (
           <Reveal key={idx} delay={idx * 100} variant="up">
-            <div className="group relative p-6 md:p-8 bg-white border border-slate-200 shadow-sm rounded-3xl hover:border-green-500 transition-all duration-500 h-full flex flex-col items-start text-left overflow-hidden">
+            <div className="group relative p-6 md:p-8 bg-white border border-slate-200 shadow-sm rounded-3xl hover:border-pink-500 transition-all duration-500 h-full flex flex-col items-start text-left overflow-hidden">
               {/* Top Glow Line */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-green-500 rounded-b-full shadow-[0_0_15px_rgba(34,197,94,0.8)] group-hover:w-24 transition-all duration-500"></div>
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-pink-500 rounded-b-full shadow-[0_0_15px_rgba(236,72,153,0.8)] group-hover:w-24 transition-all duration-500"></div>
               
               {/* Icon Box */}
-              <div className="w-10 h-10 border border-green-500/30 rounded-xl flex items-center justify-center mb-6 bg-green-500/5 group-hover:bg-green-500/10 group-hover:border-green-500/60 transition-all duration-300">
-                {React.cloneElement(benefit.icon as React.ReactElement<any>, { size: 20, className: "text-green-500" })}
+              <div className="w-10 h-10 border border-pink-500/30 rounded-xl flex items-center justify-center mb-6 bg-pink-500/5 group-hover:bg-pink-500/10 group-hover:border-pink-500/60 transition-all duration-300">
+                {React.cloneElement(benefit.icon as React.ReactElement<any>, { size: 20, className: "text-pink-500" })}
               </div>
               
-              <h4 className="text-lg md:text-xl font-bold text-slate-800 mb-3 group-hover:text-green-600 transition-colors">{benefit.title}</h4>
+              <h4 className="text-lg md:text-xl font-bold text-slate-800 mb-3 group-hover:text-pink-600 transition-colors">{benefit.title}</h4>
               <p className="text-slate-600 leading-relaxed text-sm md:text-base">
                 {benefit.desc}
               </p>
@@ -540,20 +611,20 @@ const Bonuses = () => {
       {/* Abstract Background Shapes */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-40">
         <div className="absolute top-10 left-10 w-64 h-64 bg-blue-100 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-10 right-10 w-80 h-80 bg-green-100 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-10 right-10 w-80 h-80 bg-pink-100 rounded-full blur-3xl"></div>
       </div>
 
       <div className="max-w-6xl mx-auto relative z-10">
         <Reveal className="text-center mb-16 space-y-4">
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 leading-tight">
-            🎁 ATENÇÃO: Leve GRÁTIS <br className="hidden md:block"/> <span className="text-green-600">4 Bônus Exclusivos</span>
+            🎁 ATENÇÃO: Leve GRÁTIS <br className="hidden md:block"/> <span className="text-pink-600">4 Bônus Exclusivos</span>
           </h2>
           <div className="max-w-2xl mx-auto space-y-1">
             <p className="text-xl text-slate-900 font-bold">
               (Valor Total: R$ 110,00)
             </p>
             <p className="text-lg text-slate-500 font-medium">
-              Incluídos apenas no plano de R$27,90
+              Incluídos apenas no plano de R$19,90
             </p>
           </div>
         </Reveal>
@@ -582,7 +653,7 @@ const Bonuses = () => {
                   <span className="text-[#1e3a8a] font-bold text-sm uppercase tracking-tight">
                     BÔNUS {bonus.id}
                   </span>
-                  <span className="text-green-600 font-bold text-[10px] uppercase tracking-wider">
+                  <span className="text-pink-600 font-bold text-[10px] uppercase tracking-wider">
                     HOJE: GRÁTIS
                   </span>
                 </div>
@@ -616,7 +687,7 @@ const Bonuses = () => {
             data-location="bonuses"
             role="button"
             aria-label="Quero os bônus"
-            className="inline-block px-12 py-5 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white rounded-2xl text-xl font-bold shadow-xl transition-all transform hover:-translate-y-1 text-center animate-pulse-soft uppercase"
+            className="inline-block px-12 py-5 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-700 hover:to-pink-600 text-white rounded-2xl text-xl font-bold shadow-xl transition-all transform hover:-translate-y-1 text-center animate-pulse-soft uppercase"
            >
               Quero os bônus
            </a>
@@ -644,11 +715,73 @@ const Pricing = () => {
   return (
     <section id="plans" data-section="pricing" className="py-24 px-4 bg-white scroll-mt-20 overflow-hidden text-slate-800">
       <div className="max-w-6xl mx-auto">
-        <div className="max-w-2xl mx-auto items-stretch">
-          {/* Plan Premium */}
+        <Reveal variant="fade-up" className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
+            Temos dois Planos. <span className="text-pink-600">Escolha com Sabedoria!</span>
+          </h2>
+        </Reveal>
+        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
+          {/* Plan Basic */}
           <Reveal delay={0} variant="scale" className="flex h-full">
-            <div id="premium-plan" className="relative w-full flex flex-col bg-[#f8fcfd] rounded-[2rem] border-2 border-green-500 p-6 md:p-10 shadow-xl transition-all duration-300 group overflow-hidden scroll-mt-24">
+            <div id="basic-plan" className="relative w-full flex flex-col bg-white rounded-[2rem] border border-slate-200 p-6 md:p-10 shadow-lg transition-all duration-300 group overflow-hidden scroll-mt-24">
               <div className="relative z-10 flex flex-col h-full items-center">
+                <h3 className="text-3xl font-black text-slate-800 mb-6">Plano Básico</h3>
+                {/* Pricing Info */}
+                <div className="w-full flex flex-col items-center text-center mb-8">
+                  <div className="text-slate-500 font-bold text-center uppercase tracking-wide mb-1 text-sm md:text-base">
+                    <span className="line-through mr-1">VALOR: R$ 47,00</span> HOJE POR APENAS
+                  </div>
+                  <div className="text-slate-800 text-6xl md:text-7xl font-black text-center tracking-tighter">
+                    R$ 9,90
+                  </div>
+                </div>
+                
+                {/* Features List */}
+                <div className="flex flex-col items-start mx-auto w-fit space-y-3 mb-10">
+                  {[
+                    "Atividades bíblicas prontas para imprimir"
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex gap-3 items-center">
+                      <div className="bg-[#009900] rounded p-0.5 shrink-0 flex items-center justify-center">
+                        <Check className="w-4 h-4 text-white" strokeWidth={4} />
+                      </div>
+                      <span className="text-slate-800 font-medium text-lg">{item}</span>
+                    </div>
+                  ))}
+                </div>
+                
+                {/* CTA Button */}
+                <div className="mt-auto w-full max-w-md mx-auto">
+                  <a 
+                    href={getCheckoutUrl("https://ggcheckout.app/checkout/v5/ZXz3YglegUw0oQhq7W8Z")}
+                    data-track="cta-click"
+                    data-location="pricing-basic"
+                    role="button"
+                    aria-label="Garantir Plano Básico"
+                    className="block w-full py-4 rounded-xl text-xl font-bold bg-slate-800 hover:bg-slate-900 text-white transition-all transform active:scale-95 uppercase tracking-wide shadow-lg text-center"
+                  >
+                    Garantir Plano Básico
+                  </a>
+                  
+                  {/* Footer Text */}
+                  <div className="mt-4 text-center text-slate-500 font-medium text-base">
+                    Compra 100% Segura &bull; Garantia de 30 Dias
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Plan Premium */}
+          <Reveal delay={200} variant="scale" className="flex h-full">
+            <div id="premium-plan" className="relative w-full flex flex-col bg-[#f8fcfd] rounded-[2rem] border-2 border-pink-500 p-6 md:p-10 shadow-xl transition-all duration-300 group overflow-hidden scroll-mt-24">
+              {/* Most Popular Badge */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-pink-500 text-white px-6 py-1.5 rounded-b-xl font-bold text-sm uppercase tracking-wider z-20 shadow-md whitespace-nowrap">
+                Mais Popular
+              </div>
+              
+              <div className="relative z-10 flex flex-col h-full items-center mt-4">
+                <h3 className="text-3xl font-black text-pink-600 mb-6">Plano Premium</h3>
                 {/* Image */}
                 <div className="w-full flex justify-center relative mb-8">
                   <img 
@@ -666,20 +799,21 @@ const Pricing = () => {
                   <div className="text-red-600 font-bold text-center uppercase tracking-wide mb-1 text-sm md:text-base">
                     <span className="line-through mr-1">VALOR: R$ 197,00</span> HOJE POR APENAS
                   </div>
-                  <div className="text-green-600 text-7xl md:text-8xl font-black text-center tracking-tighter">
-                    R$ 27,90
+                  <div className="text-pink-600 text-7xl md:text-8xl font-black text-center tracking-tighter">
+                    R$ 19,90
                   </div>
                 </div>
                 
                 {/* Features List */}
                 <div className="flex flex-col items-start mx-auto w-fit space-y-3 mb-10">
                   {[
+                    "Tudo do Plano Básico",
                     "+650 Atividades Bíblicas prontas",
                     "+350 Atividades Extras anuais",
                     "Histórias da Criação a Jesus",
                     "TODOS os 4 Bônus inclusos",
                     "Suporte por e-mail e whatsapp",
-                    "Garantia de 7 Dias",
+                    "Garantia de 30 Dias",
                     "Acesso Imediato"
                   ].map((item, idx) => (
                     <div key={idx} className="flex gap-3 items-center">
@@ -694,19 +828,19 @@ const Pricing = () => {
                 {/* CTA Button */}
                 <div className="mt-auto w-full max-w-md mx-auto">
                   <a 
-                    href={getCheckoutUrl("https://ggcheckout.com.br/checkout/v5/7wOe47g8XVzL1HnjKopl")}
+                    href={getCheckoutUrl("https://ggcheckout.app/checkout/v5/5edlPTtL5Kn1JlgmiIbY")}
                     data-track="cta-click"
                     data-location="pricing-premium"
                     role="button"
-                    aria-label="COMPRAR AGORA"
-                    className="block w-full py-4 rounded-xl text-xl font-black bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white transition-all transform active:scale-95 uppercase tracking-widest shadow-xl shadow-green-100 animate-pulse-soft text-center"
+                    aria-label="Garantir Plano Premium"
+                    className="block w-full py-4 rounded-xl text-xl font-black bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-700 hover:to-pink-600 text-white transition-all transform active:scale-95 uppercase tracking-widest shadow-xl shadow-pink-100 animate-pulse-soft text-center"
                   >
-                    COMPRAR AGORA
+                    Garantir Plano Premium
                   </a>
                   
                   {/* Footer Text */}
-                  <div className="mt-4 text-center text-green-600/70 font-medium text-base">
-                    * disponível apenas na versão digital
+                  <div className="mt-4 text-center text-pink-600/70 font-medium text-base">
+                    Compra 100% Segura &bull; Garantia de 30 Dias
                   </div>
                 </div>
               </div>
@@ -721,15 +855,15 @@ const Pricing = () => {
 const Guarantee = () => (
   <section className="py-8 px-4 bg-white overflow-hidden">
     <Reveal variant="scale" threshold={0.3}>
-      <div className="max-w-4xl mx-auto bg-gradient-to-br from-green-50 to-white rounded-3xl p-6 md:p-8 border border-green-100 shadow-2xl shadow-green-100/50 relative">
+      <div className="max-w-4xl mx-auto bg-gradient-to-br from-pink-50 to-white rounded-3xl p-6 md:p-8 border border-pink-100 shadow-2xl shadow-pink-100/50 relative">
         <div className="absolute top-0 right-0 -mr-10 -mt-10 w-48 h-48 bg-yellow-200/30 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 -ml-10 -mb-10 w-48 h-48 bg-green-200/30 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 -ml-10 -mb-10 w-48 h-48 bg-pink-200/30 rounded-full blur-3xl"></div>
         
         <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
           <div className="w-full md:w-1/3 flex justify-center">
             <img 
-              src="https://www.imagemhost.com.br/images/2025/04/17/Selo_de_Garantia_de_7_Dias_PNG_Transparente_Sem_Fundo.png" 
-              alt="Selo de Garantia 7 Dias" 
+              src="https://i.postimg.cc/j2cgt0hz/Selo-de-Garantia-de-30-Dias-PNG-Transparente-Sem-Fundo-removebg-preview.png" 
+              alt="Selo de Garantia 30 Dias" 
               loading="lazy"
               decoding="async"
               className="w-40 md:w-48 h-auto drop-shadow-2xl animate-bounce-subtle"
@@ -737,22 +871,22 @@ const Guarantee = () => (
           </div>
           <div className="w-full md:w-2/3 text-center md:text-left space-y-4">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 leading-tight">
-              Satisfação Garantida: <span className="text-green-600">Seu Risco é Zero</span>
+              Satisfação Garantida: <span className="text-pink-600">Seu Risco é Zero</span>
             </h2>
             <p className="text-lg text-slate-600 leading-relaxed">
-              Estamos tão confiantes na qualidade do material <span className="font-bold text-green-700">Sementinhas de Fé</span> que oferecemos uma garantia incondicional. 
-              Você tem <span className="font-bold text-slate-900 underline decoration-yellow-400 decoration-4 underline-offset-4">7 dias inteiros</span> para explorar cada atividade. 
+              Estamos tão confiantes na qualidade do material <span className="font-bold text-pink-700">Sementinhas de Fé</span> que oferecemos uma garantia incondicional. 
+              Você tem <span className="font-bold text-slate-900 underline decoration-yellow-400 decoration-4 underline-offset-4">30 dias inteiros</span> para explorar cada atividade. 
             </p>
             <p className="text-base text-slate-600">
               Se por qualquer motivo você achar que o kit não é para você, basta nos enviar um e-mail e <span className="font-bold">devolvemos 100% do seu dinheiro</span>. Sem burocracia, sem perguntas e continuamos amigos.
             </p>
             <div className="flex flex-wrap justify-center md:justify-start gap-3 pt-2 mb-4">
-               <div className="flex items-center gap-2 px-3 py-1.5 bg-white rounded-full border border-green-100 shadow-sm">
-                 <ShieldCheck className="w-4 h-4 text-green-500" />
+               <div className="flex items-center gap-2 px-3 py-1.5 bg-white rounded-full border border-pink-100 shadow-sm">
+                 <ShieldCheck className="w-4 h-4 text-pink-500" />
                  <span className="text-xs font-bold text-slate-700 uppercase tracking-wider">Compra Protegida</span>
                </div>
-               <div className="flex items-center gap-2 px-3 py-1.5 bg-white rounded-full border border-green-100 shadow-sm">
-                 <CheckCircle2 className="w-4 h-4 text-green-500" />
+               <div className="flex items-center gap-2 px-3 py-1.5 bg-white rounded-full border border-pink-100 shadow-sm">
+                 <CheckCircle2 className="w-4 h-4 text-pink-500" />
                  <span className="text-xs font-bold text-slate-700 uppercase tracking-wider">Reembolso Facilitado</span>
                </div>
             </div>
@@ -798,15 +932,15 @@ const FAQ = () => {
         <div className="space-y-4">
           {faqs.map((faq, idx) => (
             <Reveal key={idx} delay={idx * 100} variant="up">
-              <div className="border border-slate-200 rounded-2xl overflow-hidden transition-all hover:border-green-300">
+              <div className="border border-slate-200 rounded-2xl overflow-hidden transition-all hover:border-pink-300">
                 <button 
                   onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
                   aria-expanded={openIndex === idx}
                   aria-controls={`faq-answer-${idx}`}
-                  className="w-full flex items-center justify-between p-6 text-left hover:bg-green-50/30 transition-colors"
+                  className="w-full flex items-center justify-between p-6 text-left hover:bg-pink-50/30 transition-colors"
                 >
                   <span className="font-bold text-lg text-slate-800">{faq.question}</span>
-                  {openIndex === idx ? <ChevronUp className="text-green-500" /> : <ChevronDown className="text-slate-400" />}
+                  {openIndex === idx ? <ChevronUp className="text-pink-500" /> : <ChevronDown className="text-slate-400" />}
                 </button>
                 {openIndex === idx && (
                   <div id={`faq-answer-${idx}`} className="p-6 pt-0 text-slate-600 bg-white leading-relaxed">
@@ -830,7 +964,7 @@ const Testimonials = () => {
   ];
 
   return (
-    <section id="testimonials" data-section="testimonials" className="py-24 px-4 bg-green-50 overflow-hidden">
+    <section id="testimonials" data-section="testimonials" className="py-24 px-4 bg-pink-50 overflow-hidden">
       <div className="max-w-6xl mx-auto">
         <Reveal className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Veja Como Este Kit Mudou a Vida de +12.000 Famílias</h2>
@@ -861,7 +995,7 @@ const Footer = () => (
     <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
       <Reveal variant="left">
         <div className="text-center md:text-left">
-          <h2 className="text-3xl font-bold text-green-400 mb-2">Sementinhas de Fé</h2>
+          <h2 className="text-3xl font-bold text-pink-400 mb-2">Sementinhas de Fé</h2>
           <p className="text-slate-400 max-w-sm">Transformando o aprendizado bíblico infantil através da criatividade e do amor.</p>
         </div>
       </Reveal>
@@ -895,7 +1029,7 @@ const App: React.FC = () => {
         <Guarantee />
         <FAQ />
         
-        <section id="bottom-cta" data-section="bottom-cta" className="py-24 px-4 bg-green-50 text-center">
+        <section id="bottom-cta" data-section="bottom-cta" className="py-24 px-4 bg-pink-50 text-center">
           <div className="max-w-3xl mx-auto">
             <Reveal threshold={0.3}>
               <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-8 leading-tight">
@@ -915,7 +1049,7 @@ const App: React.FC = () => {
                 data-location="bottom"
                 role="button"
                 aria-label="Quero Garantir o meu acesso agora"
-                className="inline-block px-12 py-6 bg-green-600 hover:bg-green-700 text-white rounded-2xl text-2xl font-bold shadow-2xl transition-all transform hover:scale-105 active:scale-95 animate-pulse-soft uppercase"
+                className="inline-block px-12 py-6 bg-pink-600 hover:bg-pink-700 text-white rounded-2xl text-2xl font-bold shadow-2xl transition-all transform hover:scale-105 active:scale-95 animate-pulse-soft uppercase"
               >
                 Quero Garantir o meu acesso agora
               </a>
@@ -925,6 +1059,7 @@ const App: React.FC = () => {
       </main>
 
       <Footer />
+      <SocialProof />
     </div>
   );
 };
