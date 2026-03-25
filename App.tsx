@@ -699,19 +699,6 @@ const Bonuses = () => {
 
 
 const Pricing = () => {
-  const getCheckoutUrl = (baseUrl: string) => {
-    try {
-      const url = new URL(baseUrl);
-      const currentParams = new URLSearchParams(window.location.search);
-      currentParams.forEach((value, key) => {
-        url.searchParams.set(key, value);
-      });
-      return url.toString();
-    } catch (e) {
-      return baseUrl;
-    }
-  };
-
   return (
     <section id="plans" data-section="pricing" className="py-24 px-4 bg-white scroll-mt-20 overflow-hidden text-slate-800">
       <div className="max-w-6xl mx-auto">
@@ -753,7 +740,7 @@ const Pricing = () => {
                 {/* CTA Button */}
                 <div className="mt-auto w-full max-w-md mx-auto">
                   <a 
-                    href={getCheckoutUrl("https://ggcheckout.app/checkout/v5/ZXz3YglegUw0oQhq7W8Z")}
+                    href="https://ggcheckout.app/checkout/v5/ZXz3YglegUw0oQhq7W8Z"
                     data-track="cta-click"
                     data-location="pricing-basic"
                     role="button"
@@ -828,7 +815,7 @@ const Pricing = () => {
                 {/* CTA Button */}
                 <div className="mt-auto w-full max-w-md mx-auto">
                   <a 
-                    href={getCheckoutUrl("https://ggcheckout.app/checkout/v5/5edlPTtL5Kn1JlgmiIbY")}
+                    href="https://ggcheckout.app/checkout/v5/5edlPTtL5Kn1JlgmiIbY"
                     data-track="cta-click"
                     data-location="pricing-premium"
                     role="button"
