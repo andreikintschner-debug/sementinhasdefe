@@ -97,6 +97,18 @@ const handleCTAClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
   }
 };
 
+// Helper to append UTM parameters to checkout URLs
+const getCheckoutUrl = (baseUrl: string) => {
+  if (typeof window !== 'undefined') {
+    const searchParams = window.location.search;
+    if (searchParams) {
+      const separator = baseUrl.includes('?') ? '&' : '?';
+      return `${baseUrl}${separator}${searchParams.substring(1)}`;
+    }
+  }
+  return baseUrl;
+};
+
 // Components
 const Navbar = () => {
   const [dateStr, setDateStr] = useState('');
@@ -213,7 +225,7 @@ const SocialProof = () => {
             {currentName} comprou agora...
           </span>
           <span className="text-pink-100 text-xs mt-0.5">
-            Sementinhas de Fé
+            Kit Inglês Infantil
           </span>
         </div>
       </div>
@@ -233,20 +245,20 @@ const Hero = () => (
       
       <Reveal delay={200}>
         <h1 className="text-3xl md:text-5xl lg:text-[54px] font-bold text-slate-900 leading-[1.15] max-w-4xl mx-auto">
-          650+ Atividades Bíblicas Prontas para Encantar e Ensinar Crianças
+          +650 Atividades de Inglês Infantil para Aprender Brincando (Mesmo que Você Não Saiba Inglês)
         </h1>
       </Reveal>
 
       <Reveal delay={300}>
         <p className="text-lg md:text-2xl text-slate-600 max-w-3xl font-medium">
-          Colorir, jogos, quizzes, histórias e muito mais. Imprima quantas vezes quiser.
+          Colorir, jogos, quizzes e atividades interativas. Imprima quantas vezes quiser.
         </p>
       </Reveal>
 
       <Reveal variant="scale" delay={400} className="w-full max-w-4xl relative mt-8">
         <div className="relative flex justify-center">
           <div className="w-full max-w-sm mx-auto">
-            <WistiaPlayer mediaId="mgs5039qck" aspect="0.5625" paddingTop="177.78%" />
+            <WistiaPlayer mediaId="6ms7pd24h4" aspect="0.5625" paddingTop="177.78%" />
           </div>
           {/* Badge */}
           <div className="absolute -top-4 -right-4 md:top-[-5%] md:right-[-5%] bg-[#FFDE59] text-slate-900 px-3 py-1.5 rounded-lg shadow-lg flex items-center gap-2 z-20 border-2 border-white transform rotate-3">
@@ -333,13 +345,18 @@ const WhatYouGet = () => {
   const items = [
     {
       icon: <BookOpen className="w-6 h-6 text-white" />,
-      title: "+650 Atividades Bíblicas",
-      description: "Colorir, jogos, quizzes, caça-palavras e histórias completas da Bíblia"
+      title: "+650 Atividades de Inglês Infantil",
+      description: "Aprenda inglês de forma leve e divertida com jogos, quizzes e caça-palavras"
     },
     {
       icon: <Book className="w-6 h-6 text-white" />,
-      title: "Histórias Completas",
-      description: "Da Criação até os ensinamentos de Jesus, todas as histórias importantes"
+      title: "Vocabulário Essencial em Inglês",
+      description: "Cores, números, animais e objetos do dia a dia para o primeiro contato com o idioma"
+    },
+    {
+      icon: <Smartphone className="w-6 h-6 text-white" />,
+      title: "Áudios de Pronúncia Guiada em Inglês",
+      description: "Tenha acesso a áudios simples e claros com a pronúncia correta das principais palavras usadas nas atividades."
     },
     {
       icon: <Printer className="w-6 h-6 text-white" />,
@@ -358,8 +375,8 @@ const WhatYouGet = () => {
     },
     {
       icon: <Gift className="w-6 h-6 text-white" />,
-      title: "4 Bônus Exclusivos",
-      description: "No valor de R$ 110,00 totalmente grátis"
+      title: "5 Bônus Exclusivos",
+      description: "No valor de R$ 147,00 totalmente grátis"
     },
     {
       icon: <ShieldCheck className="w-6 h-6 text-white" />,
@@ -450,10 +467,11 @@ const IdealFor = () => (
             </h3>
             <ul className="space-y-4">
               {[
-                "Você trabalha no ministério infantil e precisa de material de qualidade",
-                "Deseja ensinar a Bíblia para seus filhos de forma divertida e eficaz",
+                "Deseja ensinar inglês de forma simples, mesmo que você não saiba inglês",
+                "Quer introduzir o vocabulário básico de forma natural e divertida",
                 "Não tem tempo para criar atividades do zero toda semana",
-                "Quer aproximar as crianças da Palavra de Deus com criatividade"
+                "Quer reduzir o tempo de tela com conteúdo educativo de qualidade",
+                "Busca estimular o aprendizado infantil desde cedo"
               ].map((item, idx) => (
                 <li key={idx} className="flex gap-3 items-start">
                   <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
@@ -471,11 +489,11 @@ const IdealFor = () => (
             </h3>
             <ul className="space-y-4">
               {[
-                "Você não se importa com o crescimento espiritual das crianças",
+                "Você não se interessa em ensinar inglês para as crianças",
                 "Não possui 10 minutos por dia para aplicar as atividades",
-                "Prefere deixar as crianças em frente às telas sem supervisão",
-                "Não valoriza ensino bíblico estruturado e de qualidade",
-                "Busca material secular sem fundamento bíblico"
+                "Prefere deixar o aprendizado exclusivamente para a escola",
+                "Não valoriza o ensino leve e divertido em casa",
+                "Prefere deixar as crianças em frente às telas sem supervisão"
               ].map((item, idx) => (
                 <li key={idx} className="flex gap-3 items-start">
                   <XCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
@@ -516,39 +534,39 @@ const Benefits = () => (
       <Reveal className="text-center mb-20 space-y-4">
         <h2 className="text-3xl md:text-5xl font-bold text-slate-900 tracking-tight">Benefícios Que Transformam</h2>
         <div className="w-24 h-1.5 bg-pink-500 mx-auto rounded-full shadow-[0_0_15px_rgba(236,72,153,0.5)]"></div>
-        <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto">Muito mais do que atividades, uma ferramenta completa para o ensino bíblico.</p>
+        <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto">Muito mais do que atividades, uma forma simples de introduzir o inglês no dia a dia da criança.</p>
       </Reveal>
       
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
         {[
           { 
             title: "Conexão Familiar", 
-            desc: "Momentos de qualidade aprendendo juntos sobre a fé e fortalecendo os vínculos entre pais e filhos.", 
+            desc: "Momentos de qualidade enquanto a criança aprende inglês brincando com você.", 
             icon: <Heart />
           },
           { 
-            title: "Aprendizado Efetivo", 
-            desc: "As crianças absorvem e retêm melhor os ensinamentos bíblicos através de atividades práticas e lúdicas.", 
+            title: "Aprendizado Natural", 
+            desc: "A criança aprende sem pressão, através de repetição visual e atividades divertidas.", 
             icon: <BookOpen />
           },
           { 
             title: "Economia de Tempo", 
-            desc: "Tenha tudo pronto em um só lugar. Pare de perder horas pesquisando material na internet.", 
+            desc: "Tudo pronto em um só lugar. Não precisa criar nem pesquisar atividades na internet.", 
             icon: <Clock />
           },
           { 
-            title: "Material Para Grupos", 
-            desc: "Perfeito para escola dominical, células infantis e pequenos grupos de estudo cristão.", 
+            title: "Uso em Casa ou Escola", 
+            desc: "Perfeito para mães, pais, professores e como reforço escolar divertido.", 
             icon: <Users />
           },
           { 
-            title: "Criatividade e Diversão", 
-            desc: "Atividades variadas que mantêm as crianças engajadas, curiosas e animadas para aprender.", 
+            title: "Engajamento Total", 
+            desc: "Atividades que prendem a atenção e despertam o interesse pelo inglês desde cedo.", 
             icon: <Gamepad2 />
           },
           { 
-            title: "Conteúdo Confiável", 
-            desc: "Material biblicamente fundamentado e revisado por educadores dedicados ao ensino cristão.", 
+            title: "Base Sólida", 
+            desc: "O primeiro contato com o inglês de forma leve, estruturada e muito interativa.", 
             icon: <ShieldCheck />
           }
         ].map((benefit, idx) => (
@@ -578,31 +596,38 @@ const Bonuses = () => {
   const bonuses: Bonus[] = [
     { 
       id: "1", 
-      title: "Guia de Versículos Para Memorização", 
+      title: "Guia de Primeiras Palavras em Inglês", 
       value: "R$ 27,00", 
-      description: "50 versículos ilustrados prontos para impressão, organizados por temas e idades.", 
-      image: "https://i.postimg.cc/MHsQP9SJ/750ca9aa-1d3c-4f8f-b009-2a3b5548ba9e.jpg" 
+      description: "Lista visual com vocabulário básico organizado por temas para facilitar a memorização.", 
+      image: "https://i.postimg.cc/26cyNL2G/Gemini-Generated-Image-n5a7akn5a7akn5a7-(1).png" 
     },
     { 
       id: "2", 
-      title: "Calendário Bíblico Anual Infantil", 
+      title: "Calendário de Inglês Infantil - 30 Dias", 
       value: "R$ 37,00", 
-      description: "12 meses de atividades temáticas seguindo histórias bíblicas cronologicamente.", 
-      image: "https://i.postimg.cc/QC6T4f3L/cc65effd-459a-44b2-8383-074b29997d96.jpg" 
+      description: "Plano simples e prático para ensinar um pouquinho de inglês todos os dias.", 
+      image: "https://i.postimg.cc/C1P5pnmJ/Gemini-Generated-Image-gig7upgig7upgig7.png" 
     },
     { 
       id: "3", 
-      title: "Kit de Jogos Bíblicos Divertidos", 
+      title: "Kit de Jogos em Inglês", 
       value: "R$ 27,00", 
-      description: "Quebra-cabeças, caça-palavras, jogo da memória bíblico e bingo das histórias sagradas.", 
-      image: "https://i.postimg.cc/2yHZc0DR/288ef062-9a10-4c78-b28c-1151e4327988.jpg" 
+      description: "Jogos interativos, caça-palavras e jogo da memória para reforço do vocabulário.", 
+      image: "https://i.postimg.cc/FRWzXkDD/Gemini-Generated-Image-mkt9wwmkt9wwmkt9.png" 
     },
     { 
       id: "4", 
-      title: "Como Ensinar a Bíblia Para Crianças", 
+      title: "Guia: Como Ensinar Inglês para Crianças", 
       value: "R$ 19,00", 
-      description: "Guia completo com estratégias pedagógicas e dicas práticas para educadores e pais.", 
-      image: "https://i.postimg.cc/gjMZSgP1/ca89df09-0e1c-4898-a070-28ff3209ed04.jpg" 
+      description: "Método simples com dicas práticas para ensinar inglês mesmo sem saber o idioma.", 
+      image: "https://i.postimg.cc/wvfMYR0w/Gemini-Generated-Image-m7ot8dm7ot8dm7ot.png" 
+    },
+    { 
+      id: "5", 
+      title: "Áudios de Pronúncia Guiada em Inglês", 
+      value: "R$ 37,00", 
+      description: "Tenha acesso a áudios simples e claros com a pronúncia correta das principais palavras usadas nas atividades.", 
+      image: "https://i.postimg.cc/zBtvYH0C/Gemini-Generated-Image-gi06vmgi06vmgi06.png" 
     }
   ];
 
@@ -617,11 +642,11 @@ const Bonuses = () => {
       <div className="max-w-6xl mx-auto relative z-10">
         <Reveal className="text-center mb-16 space-y-4">
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 leading-tight">
-            🎁 ATENÇÃO: Leve GRÁTIS <br className="hidden md:block"/> <span className="text-pink-600">4 Bônus Exclusivos</span>
+            🎁 ATENÇÃO: Leve GRÁTIS <br className="hidden md:block"/> <span className="text-pink-600">5 Bônus Exclusivos</span>
           </h2>
           <div className="max-w-2xl mx-auto space-y-1">
             <p className="text-xl text-slate-900 font-bold">
-              (Valor Total: R$ 110,00)
+              (Valor Total: R$ 147,00)
             </p>
             <p className="text-lg text-slate-500 font-medium">
               Incluídos apenas no plano de R$19,90
@@ -629,7 +654,7 @@ const Bonuses = () => {
           </div>
         </Reveal>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-16 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mb-16 max-w-6xl mx-auto">
           {bonuses.map((bonus, idx) => (
             <Reveal key={bonus.id} delay={idx * 150} variant="up" className="h-full">
               <div className="group relative bg-white p-5 rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] transition-all duration-500 flex flex-col h-full border border-slate-100">
@@ -726,7 +751,7 @@ const Pricing = () => {
                 {/* Features List */}
                 <div className="flex flex-col items-start mx-auto w-fit space-y-3 mb-10">
                   {[
-                    "Atividades bíblicas prontas para imprimir"
+                    "Atividades de inglês prontas para imprimir"
                   ].map((item, idx) => (
                     <div key={idx} className="flex gap-3 items-center">
                       <div className="bg-[#009900] rounded p-0.5 shrink-0 flex items-center justify-center">
@@ -740,7 +765,7 @@ const Pricing = () => {
                 {/* CTA Button */}
                 <div className="mt-auto w-full max-w-md mx-auto">
                   <a 
-                    href="https://ggcheckout.app/checkout/v5/ZXz3YglegUw0oQhq7W8Z"
+                    href={getCheckoutUrl("https://ggcheckout.app/checkout/v5/np8ILlN4KQnpJYW3cO5t")}
                     data-track="cta-click"
                     data-location="pricing-basic"
                     role="button"
@@ -772,8 +797,8 @@ const Pricing = () => {
                 {/* Image */}
                 <div className="w-full flex justify-center relative mb-8">
                   <img 
-                    src="https://i.postimg.cc/853XZkFp/Gemini-Generated-Image-tadiqrtadiqrtadi-(1).png" 
-                    alt="Kit Completo Sementinhas de Fé" 
+                    src="https://i.postimg.cc/CLD8kJc7/Gemini-Generated-Image-t7a8gct7a8gct7a8-2-removebg-preview.png" 
+                    alt="Kit Completo Inglês Infantil" 
                     loading="lazy"
                     decoding="async"
                     className="w-full max-w-[320px] object-contain hover:scale-105 transition-transform duration-500 drop-shadow-xl relative z-10"
@@ -795,10 +820,10 @@ const Pricing = () => {
                 <div className="flex flex-col items-start mx-auto w-fit space-y-3 mb-10">
                   {[
                     "Tudo do Plano Básico",
-                    "+650 Atividades Bíblicas prontas",
+                    "+650 Atividades de inglês infantil",
                     "+350 Atividades Extras anuais",
-                    "Histórias da Criação a Jesus",
-                    "TODOS os 4 Bônus inclusos",
+                    "Conteúdo organizado por nível",
+                    "TODOS os 5 Bônus inclusos",
                     "Suporte por e-mail e whatsapp",
                     "Garantia de 30 Dias",
                     "Acesso Imediato"
@@ -815,7 +840,7 @@ const Pricing = () => {
                 {/* CTA Button */}
                 <div className="mt-auto w-full max-w-md mx-auto">
                   <a 
-                    href="https://ggcheckout.app/checkout/v5/5edlPTtL5Kn1JlgmiIbY"
+                    href={getCheckoutUrl("https://ggcheckout.app/checkout/v5/altopwrUeAWTP2Sz50dT")}
                     data-track="cta-click"
                     data-location="pricing-premium"
                     role="button"
@@ -861,7 +886,7 @@ const Guarantee = () => (
               Satisfação Garantida: <span className="text-pink-600">Seu Risco é Zero</span>
             </h2>
             <p className="text-lg text-slate-600 leading-relaxed">
-              Estamos tão confiantes na qualidade do material <span className="font-bold text-pink-700">Sementinhas de Fé</span> que oferecemos uma garantia incondicional. 
+              Estamos tão confiantes na qualidade do nosso <span className="font-bold text-pink-700">Kit Inglês Infantil</span> que oferecemos uma garantia incondicional. 
               Você tem <span className="font-bold text-slate-900 underline decoration-yellow-400 decoration-4 underline-offset-4">30 dias inteiros</span> para explorar cada atividade. 
             </p>
             <p className="text-base text-slate-600">
@@ -902,9 +927,9 @@ const FAQ = () => {
   const faqs: FAQItem[] = [
     { question: "Como vou receber o material após a compra?", answer: "Você receberá o acesso imediatamente por e-mail após a confirmação do pagamento. O material é 100% digital em formato PDF." },
     { question: "As atividades são adequadas para qual faixa etária?", answer: "Sim, o material foi desenvolvido para crianças de 4 a 10 anos, abrangendo diferentes níveis de desenvolvimento." },
-    { question: "Posso imprimir quantas vezes eu quiser?", answer: "Com certeza! Uma das grandes vantagens é poder imprimir as atividades quantas estiver desejar para seus filhos ou alunos." },
-    { question: "O material é biblicamente fundamentado?", answer: "Sim, todas as histórias e atividades são baseadas fielmente nas escrituras e foram revisadas por educadores cristãos." },
-    { question: "Funciona para ministério infantil grande?", answer: "Perfeitamente. O material pode ser utilizado tanto em casa quanto em igrejas, células e escolas dominicais de qualquer tamanho." },
+    { question: "Posso imprimir quantas vezes eu quiser?", answer: "Com certeza! Uma das grandes vantagens é poder imprimir as atividades quantas desejar para seus filhos ou alunos." },
+    { question: "Preciso saber inglês para usar o material?", answer: "Não! O material foi desenvolvido para que qualquer pessoa consiga aplicar as atividades e ensinar as crianças de forma simples." },
+    { question: "Funciona para uso em casa e escola?", answer: "Perfeitamente. O material pode ser utilizado tanto por pais em casa quanto por professores como reforço escolar." },
     { question: "Vou receber atualizações do material?", answer: "No Plano Premium, você terá acesso vitalício e receberá todas as atualizações futuras sem custo adicional." }
   ];
 
@@ -945,17 +970,17 @@ const FAQ = () => {
 
 const Testimonials = () => {
   const images = [
-    "https://i.postimg.cc/VvXWSK7T/1-(2)-1764632092216-BJzow7a4.webp",
-    "https://i.postimg.cc/RhwL3gPY/2-(1)-1764632092221-Muk5Cnn-M.webp",
-    "https://i.postimg.cc/NFRkydNd/3-(3)-1764632092220-Brb-R21b-I.webp"
+    "https://i.postimg.cc/P520B25M/img-0136.png",
+    "https://i.postimg.cc/Xvqt3dr5/img-0136-(1).png",
+    "https://i.postimg.cc/MGHgxVnQ/img-0136-(2).png"
   ];
 
   return (
     <section id="testimonials" data-section="testimonials" className="py-24 px-4 bg-pink-50 overflow-hidden">
       <div className="max-w-6xl mx-auto">
         <Reveal className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Veja Como Este Kit Mudou a Vida de +12.000 Famílias</h2>
-          <p className="text-lg text-slate-600">Histórias reais de transformação no ministério infantil</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Veja Como Este Kit Está Ajudando +12.000 Famílias</h2>
+          <p className="text-lg text-slate-600">Histórias reais de crianças tendo o primeiro contato com o inglês de forma divertida</p>
         </Reveal>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {images.map((url, idx) => (
@@ -982,8 +1007,8 @@ const Footer = () => (
     <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
       <Reveal variant="left">
         <div className="text-center md:text-left">
-          <h2 className="text-3xl font-bold text-pink-400 mb-2">Sementinhas de Fé</h2>
-          <p className="text-slate-400 max-w-sm">Transformando o aprendizado bíblico infantil através da criatividade e do amor.</p>
+          <h2 className="text-3xl font-bold text-pink-400 mb-2">Inglês Infantil Fácil</h2>
+          <p className="text-slate-400 max-w-sm">Transformando o aprendizado em algo leve, divertido e natural.</p>
         </div>
       </Reveal>
       <Reveal variant="right">
@@ -993,7 +1018,7 @@ const Footer = () => (
             <a href="#" className="hover:text-white transition-colors">Privacidade</a>
             <a href="#" className="hover:text-white transition-colors">Suporte</a>
           </div>
-          <p className="text-slate-500 text-sm">© 2025 Sementinhas de Fé. Todos os direitos reservados.</p>
+          <p className="text-slate-500 text-sm">© 2025 Inglês Infantil Fácil. Todos os direitos reservados.</p>
         </div>
       </Reveal>
     </div>
@@ -1025,7 +1050,7 @@ const App: React.FC = () => {
             </Reveal>
             <Reveal delay={200} threshold={0.3}>
               <p className="text-xl text-slate-600 mb-12">
-                Milhares de famílias já estão usando este kit para transformar o aprendizado bíblico. Faça parte desta comunidade e veja a diferença na vida das suas crianças!
+                Milhares de famílias já começaram a introduzir o inglês em casa de forma simples. Faça parte desta comunidade e veja a diferença na vida das suas crianças!
               </p>
             </Reveal>
             <Reveal delay={400} variant="scale" threshold={0.3}>
